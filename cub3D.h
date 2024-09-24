@@ -6,7 +6,7 @@
 /*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 00:17:19 by abbaraka          #+#    #+#             */
-/*   Updated: 2024/09/19 19:14:15 by abbaraka         ###   ########.fr       */
+/*   Updated: 2024/09/24 18:02:35 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,17 @@ typedef struct	s_player
 typedef	struct	s_data
 {
 	mlx_t		*mlx;
+	mlx_image_t	*image;
 	char		**map;
 	t_player	*player;
 	t_ray		*rays;
 }		t_data;
+
+//	**********  INIT_DATA  **********
+void	init_player(t_data *data);
+void	get_player_pos(t_data *data);
+char	**put_map(char *arg);
+
+
 
 #endif

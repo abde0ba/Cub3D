@@ -6,13 +6,13 @@
 /*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 21:42:51 by abbaraka          #+#    #+#             */
-/*   Updated: 2024/09/19 19:36:37 by abbaraka         ###   ########.fr       */
+/*   Updated: 2024/09/24 18:40:32 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static mlx_image_t* image;
+// static mlx_image_t* image;
 
 int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 {
@@ -20,29 +20,27 @@ int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 }
 
 
-void ft_randomize(char color, int x, int y)
+void ft_put_pixel(t_data *data,char color, int x, int y)
 {
-	// (void)param;
 	int i;
 	int j;
 
 	i = y * TILE;
-	while (i < y * TILE + TILE - 1)
+	while (i < y * TILE + TILE)
 	{
 		j = x * TILE;
-		while ( j < x * TILE + TILE - 1)
+		while ( j < x * TILE + TILE)
 		{
 			if (color == 'r')
-				mlx_put_pixel(image, i, j, ft_pixel(255, 0, 0, 255));
+				mlx_put_pixel(data->image, i, j, ft_pixel(255, 0, 0, 255));
 			else if (color == 'b')
-				mlx_put_pixel(image, i, j, ft_pixel(0, 0, 0, 255));
+				mlx_put_pixel(data->image, i, j, ft_pixel(0, 0, 0, 255));
 			else if (color == 'y')
-				mlx_put_pixel(image, i, j, ft_pixel(255, 255, 0, 255));
+				mlx_put_pixel(data->image, i, j, ft_pixel(255, 255, 0, 255));
 			j++;
 		}
 		i++;
 	}
-	// printf("heigh :%d\n", image->height);
 }
 void	render_map(t_data *data)
 {
@@ -54,20 +52,17 @@ void	render_map(t_data *data)
 		while (data->map[x][y])
 		{
 			if (data->map[x][y] == '1')
-				ft_randomize('r', x, y);
+				ft_put_pixel(data, 'r', x, y);
 			else if (data->map[x][y] == '0' || data->map[x][y] == 'N')
-				ft_randomize('b', x, y);
-			printf("%c", data->map[x][y]);
+				ft_put_pixel(data, 'b', x, y);
 			y++;			
 		}
-			printf("\n");
 		x++;
 	}
 }
 
-void ft_print_player(char color, int x, int y, int size)
+void	ft_print_player(t_data *data, int x, int y, int size)
 {
-	// (void)param;
 	int i;
 	int j;
 
@@ -77,13 +72,11 @@ void ft_print_player(char color, int x, int y, int size)
 		j = x;
 		while (j < x + size)
 		{
-			if (color == 'y')
-				mlx_put_pixel(image, j, i, ft_pixel(255, 255, 0, 255));
+			mlx_put_pixel(data->image, j, i, ft_pixel(255, 255, 0, 255));
 			j++;
 		}
 		i++;
 	}
-	printf("y :%d\n", i);
 }
 
 size_t	ft_strlen(const char *str)
@@ -205,7 +198,7 @@ int	check_ray_dir_righ_left(double angle)
 	return (0);
 }
 
-void	print_line(double start_y, double start_x, double end_y, double end_x)
+void	print_line(t_data *data, double start_y, double start_x, double end_y, double end_x)
 {
 	int		i;
 	double	steps;
@@ -221,7 +214,7 @@ void	print_line(double start_y, double start_x, double end_y, double end_x)
 	i = 0;
 	while (i < steps)
 	{
-		mlx_put_pixel(image, start_x, start_y, ft_pixel(255, 255, 0, 255));
+		mlx_put_pixel(data->image, start_x, start_y, ft_pixel(255, 255, 0, 255));
 		start_x += x_steps;
 		start_y += y_steps;
 		i++;
@@ -341,18 +334,21 @@ void	cast_the_ray(t_data *data, int i)
 	{
 		vert_touch = calc_dist(data->player->x_pos, data->player->y_pos, \
 		ray.wall_vert_x, ray.wall_vert_y);
+		// printf("vert_touch :%f\n", vert_touch);
 	}
 	else
 		vert_touch = MAXFLOAT;
 	if (horz_touch > vert_touch)
 	{
-		print_line(data->player->y_pos, data->player->x_pos, ray.wall_vert_y, ray.wall_vert_x);
+		// print_line(data->player->y_pos, data->player->x_pos, ray.wall_vert_y, ray.wall_vert_x);
+		ray.distance = vert_touch;
 	}
 	else
 	{
-		print_line(data->player->y_pos, data->player->x_pos, ray.wall_horz_y, ray.wall_horz_x);
+		// print_line(data->player->y_pos, data->player->x_pos, ray.wall_horz_y, ray.wall_horz_x);
 		ray.distance = horz_touch;
 	}
+	data->rays[i] = ray;
 }
 
 void	raycasting(t_data *data)
@@ -363,7 +359,7 @@ void	raycasting(t_data *data)
 	t_ray	*rays;
 
 	i = 0;
-	angle = data->player->angle - (FOV / 2);
+	angle = ranging_angle(data->player->angle - (FOV / 2));
 	rays = malloc(WIDTH * sizeof(t_ray));
 	data->rays = rays;
 	while (i < WIDTH)
@@ -387,12 +383,76 @@ void	raycasting(t_data *data)
 	}
 }
 
+void draw_rect(t_data *data, double x, double y, double height)
+{
+	int	j;
+	double	alpha;
+	
+	alpha = (200 / data->rays[(int)x].distance) * 15;
+	if (alpha > 255)
+		alpha = 255;
+	j = 0;
+	while (j < height)
+	{
+		mlx_put_pixel(data->image, x, y + j, ft_pixel(255, 255, 255, alpha));
+		j++;
+	}
+}
+
+void	render_walls(t_data *data)
+{
+	int		i;
+	double	ray_distance;
+	double	distance_proj_plane;
+	double	wall_strip_height;
+
+	i = 0;
+	while (i < WIDTH)
+	{
+		ray_distance = data->rays[i].distance * cos(data->rays[i].angle - data->player->angle);
+		distance_proj_plane = (WIDTH / 2) / tan(FOV / 2);
+		wall_strip_height = (TILE / ray_distance) * distance_proj_plane;
+		if (wall_strip_height > HEIGHT)
+			wall_strip_height = HEIGHT;
+		if (distance_proj_plane > WIDTH)
+			distance_proj_plane = WIDTH;
+		draw_rect(data, i, (HEIGHT / 2) - (wall_strip_height / 2), wall_strip_height);
+		i++;
+	}
+}
+
+void	move_player(t_data *data)
+{
+	double	x;
+	double	y;
+	double	step;
+
+	step = 0;
+	data->player->angle += data->player->rot_dir * data->player->rot_speed;
+	step = data->player->walk_dir * data->player->walk_speed;
+	x = data->player->x_pos + cos(data->player->angle) * step;
+	y = data->player->y_pos + sin(data->player->angle) * step;
+	if (!check_player_in_wall(data, y + 10, x + 10))
+	{
+		if (!check_player_in_wall(data, data->player->y_pos, x)
+			&& !check_player_in_wall(data, y, data->player->x_pos))
+		{	
+			data->player->x_pos = x;
+			data->player->y_pos = y;
+		}
+	}
+}
+
+void	render(t_data *data)
+{
+	render_walls(data);
+	render_map(data);
+	ft_print_player(data, data->player->x_pos - 5, data->player->y_pos - 5, 11);
+}
+
 void ft_hook(void* param)
 {
 	t_data* data;
-	double	x;
-	double	y;
-	double	step = 0;
 
 	data = (t_data *)param;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
@@ -405,36 +465,17 @@ void ft_hook(void* param)
 		data->player->rot_dir = -1;
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 		data->player->rot_dir = 1;
-	data->player->angle += data->player->rot_dir * data->player->rot_speed;
-	step = data->player->walk_dir * data->player->walk_speed;
-	x = data->player->x_pos + cos(data->player->angle) * step;
-	y = data->player->y_pos + sin(data->player->angle) * step;
-	if (!check_player_in_wall(data, y, x))
-	{
-		data->player->x_pos = x;
-		data->player->y_pos = y;
-	}
-	mlx_delete_image(data->mlx, image);
-	image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-	mlx_image_to_window(data->mlx, image, 0, 0);
-	render_map(data);
-	ft_print_player('y', data->player->x_pos - 5, data->player->y_pos - 5, 11);
-	// int	k = 0;
-	printf("cos is %f and sin is %f\n", cos(data->player->angle), sin(data->player->angle));
+	move_player(data);
+	mlx_delete_image(data->mlx, data->image);
+	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	mlx_image_to_window(data->mlx, data->image, 0, 0);
 	raycasting(data);
-	// while (k < WIDTH)
-	// {
-	// 	int	h = 0;
-	// 	while (h < 30)
-	// 	{
-	// 		mlx_put_pixel(image, data->player->x_pos + cos(data->rays[k].angle) * h, data->player->y_pos + sin(data->rays[k].angle) * h, ft_pixel(255, 255, 0, 255));
-	// 		h++;
-	// 	}
-	// 	k++;
-	// }
+	render(data);
+	//printf("cos is %f and sin is %f\n", cos(data->player->angle), sin(data->player->angle));
+	free(data->rays);
 	data->player->rot_dir = 0;
 	data->player->walk_dir = 0;
-	printf("Angle :%f\n", data->player->angle * 180 / M_PI);
+	//printf("Angle :%f\n", data->player->angle * 180 / M_PI);
 }
 
 
@@ -483,12 +524,9 @@ void	get_player_pos(t_data *data)
 				{
 					data->player->x_pos = x * TILE + (TILE / 2);
 					data->player->y_pos = y * TILE + (TILE / 2);
-					printf("player x :%f\n", data->player->x_pos);
-					printf("player y :%f\n", data->player->y_pos);
 				}
 		x++;
 		}
-			printf("\n");
 			y++;			
 	}
 }
@@ -498,7 +536,7 @@ void	init_player(t_data *data)
 	t_player	*player;
 
 	player = data->player;
-	player->angle = (M_PI / 2);
+	player->angle = ranging_angle(M_PI / 2);
 	player->rot_speed = (M_PI / 180);
 	player->walk_speed = TILE / 20;
 	player->rot_dir = 0;
@@ -523,7 +561,8 @@ int32_t main(int ac, char **av)
 		puts(mlx_strerror(mlx_errno));
 		return(EXIT_FAILURE);
 	}
-	if (!(image = mlx_new_image(data->mlx, WIDTH, HEIGHT)))
+	data->image = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	if (!data->image)
 	{
 		mlx_close_window(data->mlx);
 		puts(mlx_strerror(mlx_errno));
@@ -531,9 +570,10 @@ int32_t main(int ac, char **av)
 	}
 	get_player_pos(data);
 	render_map(data);
-	mlx_image_to_window(data->mlx, image, 0, 0);
+	mlx_image_to_window(data->mlx, data->image, 0, 0);
 	mlx_loop_hook(data->mlx, ft_hook, data);
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);
+
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 #    By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/12 21:42:49 by abbaraka          #+#    #+#              #
-#    Updated: 2024/09/16 13:42:58 by abbaraka         ###   ########.fr        #
+#    Updated: 2024/09/24 16:34:38 by abbaraka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,10 +29,10 @@ RM= rm -rf
 
 $(NAME): $(OBJS)
 
-		$(CC) $(CFLAGS) $(OBJS) $(MLX_FLAGS) -o $(NAME)  -g -fsanitize=address
+		$(CC) $(CFLAGS) $(OBJS) $(MLX_FLAGS) -o $(NAME) 
 
 %.o : %.c $(HEADER)
-		$(CC) $(CFLAGS) -c $< -o $@ -g -fsanitize=address 
+		$(CC) $(CFLAGS) -c $< -o $@ 
 
 all : $(NAME)
 
