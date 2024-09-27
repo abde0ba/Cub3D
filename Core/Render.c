@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 22:02:18 by abadouab          #+#    #+#             */
-/*   Updated: 2024/09/25 14:05:15 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:47:20 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void draw_rect(double x, double y, double height)
 	j = 0;
 	while (j < height)
 	{
-		mlx_put_pixel(data()->images.screen, x, y + j, ft_pixel(255, 255, 255, alpha));
+		mlx_put_pixel(data()->images.screen, x, y + j, \
+		ft_pixel(255, 255, 255, alpha));
 		j++;
 	}
 }
@@ -67,7 +68,10 @@ void	render_map(void)
 		{
 			if (data()->map.grid[x][y] == '1')
 				ft_put_pixel('y', x, y);
-			else if (data()->map.grid[x][y] == '0' || data()->map.grid[x][y] == 'N')
+			else if (data()->map.grid[x][y] == '0'
+			|| data()->map.grid[x][y] == 'N'
+			|| data()->map.grid[x][y] == 'S' || data()->map.grid[x][y] == 'E'
+			|| data()->map.grid[x][y] == 'W')
 				ft_put_pixel('b', x, y);
 			y++;			
 		}
@@ -109,14 +113,18 @@ void ft_hook(void *param)
 	(void) param;
 	if (mlx_is_key_down(data()->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data()->mlx);
-	if (mlx_is_key_down(data()->mlx, MLX_KEY_UP))
+	if (mlx_is_key_down(data()->mlx, MLX_KEY_W))
 		data()->player.walk.direction = 1;
-	if (mlx_is_key_down(data()->mlx, MLX_KEY_DOWN))
+	if (mlx_is_key_down(data()->mlx, MLX_KEY_S))
 		data()->player.walk.direction = -1;
 	if (mlx_is_key_down(data()->mlx, MLX_KEY_LEFT))
 		data()->player.rot.direction = -1;
 	if (mlx_is_key_down(data()->mlx, MLX_KEY_RIGHT))
 		data()->player.rot.direction = 1;
+	if (mlx_is_key_down(data()->mlx, MLX_KEY_A))
+		data()->player.l_r.direction = 1;
+	if (mlx_is_key_down(data()->mlx, MLX_KEY_D))
+		data()->player.l_r.direction = -1;
 	move_player();
 	mlx_delete_image(data()->mlx, data()->images.screen);
 	data()->images.screen = mlx_new_image(data()->mlx, WIN_WIDTH, WIN_HEIGHT);
@@ -126,5 +134,7 @@ void ft_hook(void *param)
 	//printf("cos is %f and sin is %f\n", cos(data()->player->angle), sin(data()->player->angle));
 	data()->player.rot.direction = 0;
 	data()->player.walk.direction = 0;
+	data()->player.l_r.direction = 0;
+	free(data()->rays);
 	//printf("Angle :%f\n", data()->player->angle * 180 / M_PI);
 }

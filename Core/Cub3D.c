@@ -3,14 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   Cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:45 by abadouab          #+#    #+#             */
-/*   Updated: 2024/09/25 15:23:31 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:25:36 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
+
+void	get_player_pos(t_cub3d *data)
+{
+	int x;
+	int y;
+
+	y = 0;
+	while (data->map.grid[y])
+	{
+		x = 0;
+		while (data->map.grid[y][x])
+		{
+			if (data->map.grid[y][x] == 'N')
+				data->player.angle = (3 * M_PI) / 2;
+			else if (data->map.grid[y][x] == 'S')
+				data->player.angle = (M_PI) / 2;
+			else if (data->map.grid[y][x] == 'E')
+				data->player.angle = 2 * M_PI;
+			else if (data->map.grid[y][x] == 'W')
+				data->player.angle = M_PI;
+			x++;
+		}
+			y++;			
+	}
+}
 
 t_cub3d	*data(void)
 {
@@ -60,7 +85,7 @@ int	main(int ac, char **av)
 	data()->images.west = init_image(data()->textures.west);
 	data()->images.south = init_image(data()->textures.south);
 	data()->images.north = init_image(data()->textures.north);
-	render_map();
+	get_player_pos(data());
 	mlx_image_to_window(data()->mlx, data()->images.screen, 0, 0);
 	mlx_loop_hook(data()->mlx, ft_hook, NULL);
 	mlx_loop(data()->mlx);

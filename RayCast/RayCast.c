@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RayCast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:15:35 by abadouab          #+#    #+#             */
-/*   Updated: 2024/09/24 22:30:03 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/09/27 17:05:03 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,17 @@ int	cast_the_ray_horz(t_ray *ray)
 	step_y = TILE;
 	if (!check_ray_dir_down_up(ray->angle))
 		step_y *= -1;
-	step_x = (TILE * (inter_x - data()->player.pos_x)) / (inter_y - data()->player.pos_y);
+	// step_x = (TILE * (inter_x - data()->player.pos_x)) / (inter_y - data()->player.pos_y);
+	step_x = step_y / tan(ray->angle);
 	if (check_ray_dir_righ_left(ray->angle) && step_x < 0)
 		step_x *= -1;
 	if (!check_ray_dir_righ_left(ray->angle) && step_x > 0)
 		step_x *= -1;
 	next_on_wallx = inter_x;
 	next_on_wally = inter_y;
-	while (next_on_wallx >= 0 && next_on_wallx < WIN_WIDTH && next_on_wally >= 0 && next_on_wally < WIN_HEIGHT)
+	while (next_on_wallx >= 0 && floor(next_on_wallx) < WIN_WIDTH && next_on_wally >= 0 && floor(next_on_wally) < WIN_HEIGHT)
 	{
+		// printf("---- %f , %f , %f\n", next_on_wallx / TILE , next_on_wally/TILE,  step_x) ;
 		check_next_on_wally = next_on_wally;
 		if (!check_ray_dir_down_up(ray->angle))
 			check_next_on_wally--;
@@ -73,14 +75,15 @@ int	cast_the_ray_vert(t_ray *ray)
 	step_x = TILE;
 	if (!check_ray_dir_righ_left(ray->angle))
 		step_x *= -1;
-	step_y = (TILE * (inter_y - data()->player.pos_y)) / (inter_x - data()->player.pos_x);
+	// step_y = (TILE * (inter_y - data()->player.pos_y)) / (inter_x - data()->player.pos_x);
+	step_y = step_x * tan(ray->angle);
 	if (!check_ray_dir_down_up(ray->angle) && step_y > 0)
 		step_y *= -1;
 	if (check_ray_dir_down_up(ray->angle) && step_y < 0)
 		step_y *= -1;
 	next_on_wallx = inter_x;
 	next_on_wally = inter_y;
-	while (next_on_wallx >= 0 && next_on_wallx <= WIN_WIDTH && next_on_wally >= 0 && next_on_wally <= WIN_HEIGHT)
+	while (next_on_wallx >= 0 && next_on_wallx < WIN_WIDTH && next_on_wally >= 0 && next_on_wally < WIN_HEIGHT)
 	{
 		check_next_on_wallx = next_on_wallx;
 		if (!check_ray_dir_righ_left(ray->angle))
@@ -96,7 +99,8 @@ int	cast_the_ray_vert(t_ray *ray)
 			next_on_wallx += step_x;
 			next_on_wally += step_y;
 		}
-	}
+
+	}	
 	return (0);
 }
 
@@ -111,6 +115,7 @@ void	cast_the_ray(int i)
 	vert_touch = 0;
 	if (cast_the_ray_horz(&ray))
 	{
+		// printf("here\n");
 		horz_touch = calc_dist(data()->player.pos_x, data()->player.pos_y, \
 		ray.wall_horz_x, ray.wall_horz_y);
 	}
@@ -127,6 +132,7 @@ void	cast_the_ray(int i)
 		ray.distance = vert_touch;
 	else
 		ray.distance = horz_touch;
+	// printf("Ray vert:%f.  Hor : %f , ang : %f\n", vert_touch, horz_touch, ray.angle);
 	data()->rays[i] = ray;
 }
 
@@ -137,7 +143,7 @@ void	raycasting(void)
 
 	i = 0;
 	angle = ranging_angle(data()->player.angle - (FOV / 2));
-	data()->rays = allocate(WIN_WIDTH, sizeof(t_ray));
+	data()->rays = malloc(WIN_WIDTH * sizeof(t_ray));
 	while (i < WIN_WIDTH)
 	{
 		data()->rays[i].wall_horz_x = 0;

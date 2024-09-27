@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Types_Cub3D.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/09/25 14:16:00 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/09/26 16:23:34 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_player
 	double			angle;			// Player's direction (angle)
 	t_move			rot;			// Player's view direction
 	t_move			walk;			// Player's walk direction move
+	t_move			l_r;			// Player's left and right direction move
 }					t_player;
 
 // Struct for map data
