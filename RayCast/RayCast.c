@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RayCast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:15:35 by abadouab          #+#    #+#             */
-/*   Updated: 2024/09/27 17:05:03 by abbaraka         ###   ########.fr       */
+/*   Updated: 2024/09/28 14:35:53 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ void	cast_the_ray(int i)
 	vert_touch = 0;
 	if (cast_the_ray_horz(&ray))
 	{
-		// printf("here\n");
 		horz_touch = calc_dist(data()->player.pos_x, data()->player.pos_y, \
 		ray.wall_horz_x, ray.wall_horz_y);
 	}
@@ -132,7 +131,6 @@ void	cast_the_ray(int i)
 		ray.distance = vert_touch;
 	else
 		ray.distance = horz_touch;
-	// printf("Ray vert:%f.  Hor : %f , ang : %f\n", vert_touch, horz_touch, ray.angle);
 	data()->rays[i] = ray;
 }
 

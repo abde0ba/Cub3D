@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Types_Cub3D.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/09/26 16:23:34 by abbaraka         ###   ########.fr       */
+/*   Updated: 2024/09/28 18:36:27 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,20 @@ typedef struct s_textures
 // Struct for Images
 typedef struct s_image
 {
-	mlx_image_t	*screen;		// Main images to draw pixels
-	mlx_image_t	*north;			// Images for north wall
-	mlx_image_t	*south;			// Images for south wall
-	mlx_image_t	*east;			// Images for east wall
-	mlx_image_t	*west;			// Images for west wall
+	mlx_image_t	*screen;		// Main image to draw pixels
+	mlx_image_t	*north;			// Image for north wall
+	mlx_image_t	*south;			// Image for south wall
+	mlx_image_t	*east;			// Image for east wall
+	mlx_image_t	*west;			// Image for west wall
 }				t_image;
 
 // Struct for floor and ceiling colors
 typedef struct s_colors
 {
 	int			floor;			// Floor color Value
+	int			setfloor;		// Floor color set
 	int			ceiling;		// Ceiling color Value
+	int			setceiling;		// Ceiling color set
 }					t_colors;
 
 // Main Cub3D struct integrating all components

@@ -3,31 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   Movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 21:57:45 by abadouab          #+#    #+#             */
-/*   Updated: 2024/09/27 17:33:51 by abbaraka         ###   ########.fr       */
+/*   Updated: 2024/09/28 18:39:28 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
 
-void	ft_print_player(int x, int y, int size)
+int	set_player_angle(char set)
 {
-	int i;
-	int j;
-
-	i = y;
-	while (i < y + size)
-	{
-		j = x;
-		while (j < x + size)
-		{
-			mlx_put_pixel(data()->images.screen, j, i, ft_pixel(255, 255, 0, 255));
-			j++;
-		}
-		i++;
-	}
+	if (set == '0')
+		return (false);
+	if (set == 'N')
+		data()->player.angle = (3 * M_PI) / 2;
+	else if (set == 'S')
+		data()->player.angle = (M_PI) / 2;
+	else if (set == 'E')
+		data()->player.angle = 2 * M_PI;
+	else if (set == 'W')
+		data()->player.angle = M_PI;
+	return (true);
 }
 
 int	check_player_in_wall(double y, double x)
@@ -82,4 +79,3 @@ else if (data()->player.l_r.direction == -1)
 		}
 	}
 }
-	
