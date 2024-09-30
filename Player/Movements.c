@@ -6,7 +6,7 @@
 /*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 21:57:45 by abadouab          #+#    #+#             */
-/*   Updated: 2024/09/27 17:33:51 by abbaraka         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:45:44 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,31 +55,27 @@ void	move_player(void)
 	double	y;
 	double	step;
 
-	step = 0;
 	data()->player.angle += data()->player.rot.direction * data()->player.rot.speed;
 	step = data()->player.walk.direction * data()->player.walk.speed;
 	x = data()->player.pos_x + cos(data()->player.angle) * step;
 	y = data()->player.pos_y + sin(data()->player.angle) * step;
-// printf("left and right dir %d\n", data()->player.l_r.direction);
-if (data()->player.l_r.direction == 1)
-{
-    x = data()->player.pos_x - cos(data()->player.angle + (90 * M_PI / 180)); // Fixed here
-    y = data()->player.pos_y - sin(data()->player.angle + (90 * M_PI / 180));
-}
-else if (data()->player.l_r.direction == -1)
-{
-    x = data()->player.pos_x + cos(data()->player.angle + (90 * M_PI / 180));
-    y = data()->player.pos_y + sin(data()->player.angle + (90 * M_PI / 180));
-}
-
-	if (!check_player_in_wall(y + 6, x + 6))
+	if (data()->player.l_r.direction == 1)
 	{
-		if (!check_player_in_wall(data()->player.pos_y, x)
-			&& !check_player_in_wall(y, data()->player.pos_x))
-		{	
-			data()->player.pos_x = x;
-			data()->player.pos_y = y;
-		}
+		x = data()->player.pos_x - cos(data()->player.angle + (90 * M_PI / 180));
+		y = data()->player.pos_y - sin(data()->player.angle + (90 * M_PI / 180));
 	}
+	else if (data()->player.l_r.direction == -1)
+	{
+		x = data()->player.pos_x + cos(data()->player.angle + (90 * M_PI / 180));
+		y = data()->player.pos_y + sin(data()->player.angle + (90 * M_PI / 180));
+	}
+	if (data()->player.pos_x < x && !check_player_in_wall(data()->player.pos_y, x + 10))
+		data()->player.pos_x = x;
+	else if (data()->player.pos_x > x && !check_player_in_wall(data()->player.pos_y, x - 10))
+		data()->player.pos_x = x;
+	if (data()->player.pos_y < y && !check_player_in_wall(y + 10, data()->player.pos_x))
+		data()->player.pos_y = y;
+	else if (data()->player.pos_y > y && !check_player_in_wall(y - 10, data()->player.pos_x))
+		data()->player.pos_y = y;
 }
 	

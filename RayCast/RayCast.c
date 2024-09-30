@@ -6,7 +6,7 @@
 /*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:15:35 by abadouab          #+#    #+#             */
-/*   Updated: 2024/09/27 17:05:03 by abbaraka         ###   ########.fr       */
+/*   Updated: 2024/09/28 18:01:14 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,8 @@ int	cast_the_ray_horz(t_ray *ray)
 		step_x *= -1;
 	next_on_wallx = inter_x;
 	next_on_wally = inter_y;
-	while (next_on_wallx >= 0 && floor(next_on_wallx) < WIN_WIDTH && next_on_wally >= 0 && floor(next_on_wally) < WIN_HEIGHT)
+	while (next_on_wallx >= 0 && next_on_wallx < WIN_WIDTH && next_on_wally >= 0 && next_on_wally < WIN_HEIGHT)
 	{
-		// printf("---- %f , %f , %f\n", next_on_wallx / TILE , next_on_wally/TILE,  step_x) ;
 		check_next_on_wally = next_on_wally;
 		if (!check_ray_dir_down_up(ray->angle))
 			check_next_on_wally--;
