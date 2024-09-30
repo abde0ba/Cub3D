@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 10:16:12 by abadouab          #+#    #+#             */
-/*   Updated: 2024/09/28 19:03:26 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/09/30 18:54:48 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ void	draw_player()
 		}
 		i++;
 	}
+	i = -1;
+	while (++i < 10)
+		put_pixels(x + cos(data()->player.angle) * i + 3,
+		y + sin(data()->player.angle) * i + 2, set_color(255, 255, 155, 255));
 }
 
 static void	draw_pixel(char color, int x, int y)
