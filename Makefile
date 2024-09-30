@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+         #
+#    By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/16 12:39:22 by abadouab          #+#    #+#              #
-#    Updated: 2024/09/25 20:12:47 by abbaraka         ###   ########.fr        #
+#    Updated: 2024/09/28 10:16:50 by abadouab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS		=	Core/Cub3D.c \
 				RayCast/RayCalc.c \
 				Player/Movements.c \
 				Core/Render.c \
+				Minimap/Minimap.c \
 				Error/ErrorHandler.c
 
 OBJS_DIR	=	.Objects/

@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:11:55 by abadouab          #+#    #+#             */
-/*   Updated: 2024/09/25 13:31:05 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/09/28 18:54:34 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	is_map_surrounded(t_map *map, int height)
 		if (valid_player_symbols(grid[height][width]) == false
 			&& grid[height][width] != '0')
 			continue ;
-		if (grid[height][width] != '0')
+		if (set_player_angle(grid[height][width]) == true)
 		{
 			data()->player.pos_x = width * TILE + (TILE / 2);
 			data()->player.pos_y = height * TILE + (TILE / 2);

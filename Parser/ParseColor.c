@@ -6,11 +6,16 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:11:20 by abadouab          #+#    #+#             */
-/*   Updated: 2024/09/23 11:46:26 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/09/27 23:00:12 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
+
+int	set_color(int red, int green, int blue, int all)
+{
+	return (red << 24 | green << 16 | blue << 8 | all);
+}
 
 static void	detect_invalid_symbols(char *object)
 {
@@ -56,12 +61,13 @@ static short	string_to_byte(char *string)
 
 int	parse_color(char *object)
 {
+	char	set;
 	int		red;
 	int		green;
 	int		blue;
 	char	**colors;
 
-	object++;
+	set = *object++;
 	duplicated_elements(*data()->map.load);
 	detect_invalid_symbols(object);
 	colors = ft_split(object, ',');
@@ -71,5 +77,9 @@ int	parse_color(char *object)
 	red = string_to_byte(colors[0]);
 	green = string_to_byte(colors[1]);
 	blue = string_to_byte(colors[2]);
-	return (red << 16 | green << 8 | blue);
+	if (set == 'F')
+		data()->colors.setfloor = 1;
+	if (set == 'C')
+		data()->colors.setceiling = 1;
+	return (set_color(red, green, blue, 0XFF));
 }
