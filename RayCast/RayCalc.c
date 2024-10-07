@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RayCalc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 22:22:30 by abadouab          #+#    #+#             */
-/*   Updated: 2024/09/27 23:02:15 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/07 11:40:57 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ double	calc_dist(double fx, double fy, double sx, double sy)
 int	check_ray_dir_down_up(double angle)
 {
 	if (angle > 0 && angle < M_PI)
-			return (1);
+		return (1);
 	return (0);
 }
 
 int	check_ray_dir_righ_left(double angle)
 {
 	if (angle < 0.5 * M_PI || angle > 1.5 * M_PI)
-			return (1);
+		return (1);
 	return (0);
 }
 

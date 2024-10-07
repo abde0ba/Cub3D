@@ -6,7 +6,7 @@
 /*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 10:16:12 by abadouab          #+#    #+#             */
-/*   Updated: 2024/09/30 18:54:48 by abbaraka         ###   ########.fr       */
+/*   Updated: 2024/10/07 11:29:58 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	put_pixels(int x, int y, int color)
 	mlx_put_pixel(data()->images.screen, x, y, color);
 }
 
-void	draw_player()
+void	draw_player(void)
 {
 	int		i;
 	int		j;
@@ -40,7 +40,8 @@ void	draw_player()
 	i = -1;
 	while (++i < 10)
 		put_pixels(x + cos(data()->player.angle) * i + 3,
-		y + sin(data()->player.angle) * i + 2, set_color(255, 255, 155, 255));
+			y + sin(data()->player.angle) * i + 2,
+			set_color(255, 255, 155, 255));
 }
 
 static void	draw_pixel(char color, int x, int y)
@@ -52,7 +53,7 @@ static void	draw_pixel(char color, int x, int y)
 	while (i < (y * 15) + 14)
 	{
 		j = x * 15;
-		while ( j < (x * 15) + 14)
+		while (j < (x * 15) + 14)
 		{
 			if (color == 'r')
 				put_pixels(i, j, set_color(255, 255, 255, 255));
