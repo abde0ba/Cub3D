@@ -6,7 +6,7 @@
 /*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:45 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/07 11:20:50 by abbaraka         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:49:17 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,21 @@ mlx_image_t	*init_image(char *path)
 }
 
 void	mouse_move(double a, double b, void *param)
+void	mouse_move()
 {
 	int32_t	x;
 	int32_t	y;
 	int32_t	offset_x;
 
 	((void)param, (void)a, (void)b);
+	mlx_get_mouse_pos(data()->mlx, &x, &y);
+	offset_x = x - (WIN_WIDTH / 2);
+	data()->player.angle += offset_x * data()->player.rot.speed;
+	mlx_set_mouse_pos(data()->mlx, WIN_WIDTH / 2, WIN_HEIGHT / 2);
+	int32_t		x;
+	int32_t		y;
+	int32_t		offset_x;
+
 	mlx_get_mouse_pos(data()->mlx, &x, &y);
 	offset_x = x - (WIN_WIDTH / 2);
 	data()->player.angle += offset_x * data()->player.rot.speed;
@@ -69,7 +78,7 @@ int	main(int ac, char **av)
 	data()->images.west = init_image(data()->textures.west);
 	data()->images.south = init_image(data()->textures.south);
 	data()->images.north = init_image(data()->textures.north);
-	mlx_loop_hook(data()->mlx, ft_hook, NULL);
+	mlx_loop_hook(data()->mlx, game_loop, NULL);
 	mlx_cursor_hook(data()->mlx, mouse_move, NULL);
 	mlx_loop(data()->mlx);
 	mlx_terminate(data()->mlx);

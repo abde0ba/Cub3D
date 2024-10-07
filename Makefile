@@ -6,7 +6,7 @@
 #    By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/16 12:39:22 by abadouab          #+#    #+#              #
-#    Updated: 2024/10/07 12:11:18 by abbaraka         ###   ########.fr        #
+#    Updated: 2024/10/07 13:47:19 by abbaraka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ SRCS		=	Core/Cub3D.c \
 				Player/Movements.c \
 				Core/Render.c \
 				Minimap/Minimap.c \
+				Graphics/ApplyTextures.c \
+				Graphics/FloorAndCeiling.c \
 				Error/ErrorHandler.c
 
 OBJS_DIR	=	.Objects/

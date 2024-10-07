@@ -6,52 +6,11 @@
 /*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 22:02:18 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/07 11:26:32 by abbaraka         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:49:38 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
-
-void	draw_rect(double x, double y, double height)
-{
-	int		j;
-	double	alpha;
-
-	alpha = (200 / data()->rays[(int)x].distance) * 15;
-	if (alpha > 255)
-		alpha = 255;
-	j = 0;
-	while (j < height)
-	{
-		mlx_put_pixel(data()->images.screen, x, y + j,
-			set_color(255, 255, 255, alpha));
-		j++;
-	}
-}
-
-static void	render_walls(void)
-{
-	int		i;
-	double	ray_distance;
-	double	distance_proj_plane;
-	double	wall_strip_height;
-
-	i = 0;
-	while (i < WIN_WIDTH)
-	{
-		ray_distance = data()->rays[i].distance * \
-		cos(data()->rays[i].angle - data()->player.angle);
-		distance_proj_plane = (WIN_WIDTH / 2) / tan(FOV / 2);
-		wall_strip_height = (TILE / ray_distance) * distance_proj_plane;
-		if (wall_strip_height > WIN_HEIGHT)
-			wall_strip_height = WIN_HEIGHT;
-		if (distance_proj_plane > WIN_WIDTH)
-			distance_proj_plane = WIN_WIDTH;
-		draw_rect(i, (WIN_HEIGHT / 2) - \
-		(wall_strip_height / 2), wall_strip_height);
-		i++;
-	}
-}
 
 static void	render(void)
 {
@@ -71,7 +30,7 @@ static void	render(void)
 	free(data()->rays);
 }
 
-void	ft_hook(void *param)
+void	game_loop(void *param)
 {
 	(void) param;
 	if (mlx_is_key_down(data()->mlx, MLX_KEY_ESCAPE))

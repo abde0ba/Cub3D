@@ -6,7 +6,7 @@
 /*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 10:16:12 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/07 11:29:58 by abbaraka         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:50:45 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	draw_player(void)
 	y = ((data()->player.pos_y / TILE) * 15) - 2;
 	x = ((data()->player.pos_x / TILE) * 15) - 4;
 	i = y;
-	while (i < y + 4)
+	while (i < y + 5)
 	{
 		j = x;
-		while (j < x + 7)
+		while (j < x + 5)
 		{
 			put_pixels(j, i, set_color(255, 255, 155, 255));
 			j++;

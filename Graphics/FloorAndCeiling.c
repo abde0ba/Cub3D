@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ErrorHandler.c                                     :+:      :+:    :+:   */
+/*   FloorAndCeiling.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/19 19:21:42 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/02 14:01:47 by abadouab         ###   ########.fr       */
+/*   Created: 2024/10/02 12:16:39 by abadouab          #+#    #+#             */
+/*   Updated: 2024/10/07 10:06:27 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
 
-void	error_hanlder(char *message)
+void	color_floor_ceiling(void)
 {
-	if (message)
+	int		x;
+	int		y;
+	int		color;
+
+	y = 0;
+	while (y < WIN_HEIGHT)
 	{
-		ft_putstr_fd(RED"Error:\n"RESET, STDERR_FILENO);
-		ft_putstr_fd("Cub3D: ", STDERR_FILENO);
-		ft_putstr_fd(message, STDERR_FILENO);
-		ft_putstr_fd(RESET"\n", STDERR_FILENO);
+		x = 0;
+		if (y < WIN_HEIGHT / 2)
+			color = data()->colors.floor;
+		else
+			color = data()->colors.ceiling;
+		while (x < WIN_WIDTH)
+		{
+			mlx_put_pixel(data()->images.screen, x, y, color);
+			x++;
+		}
+		y++;
 	}
-	cleanup();
-	if (data()->map.file != ERROR)
-		exit(data()->map.file);
-	if (data()->mlx)
-		mlx_terminate(data()->mlx);
-	exit(EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/07 12:10:45 by abbaraka         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:50:05 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,14 @@ int			check_ray_dir_righ_left(double angle);
 
 ///////////////// CUB3D RANDER /////////////////
 
+void	minimap_rander(void);
+void	game_loop(void *param);
+void	move_player(void);
+void	draw_player(void);
+int		set_color(int red, int green, int blue, int all);
+void	apply_textures(void);
+void	color_floor_ceiling(void);
+void	render_walls(void);
 void		minimap_rander(void);
 void		ft_hook(void *param);
 void		move_player(void);
