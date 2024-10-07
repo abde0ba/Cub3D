@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+         #
+#    By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/16 12:39:22 by abadouab          #+#    #+#              #
-#    Updated: 2024/09/30 18:13:19 by abbaraka         ###   ########.fr        #
+#    Updated: 2024/10/02 12:34:08 by abadouab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ SRCS		=	Core/Cub3D.c \
 				Player/Movements.c \
 				Core/Render.c \
 				Minimap/Minimap.c \
+				Graphics/ApplyTextures.c \
+				Graphics/FloorAndCeiling.c \
 				Error/ErrorHandler.c
 
 OBJS_DIR	=	.Objects/

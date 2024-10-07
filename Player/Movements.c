@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 21:57:45 by abadouab          #+#    #+#             */
-/*   Updated: 2024/09/30 15:52:03 by abbaraka         ###   ########.fr       */
+/*   Updated: 2024/10/02 12:01:27 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,12 @@ int	check_player_in_wall(double y, double x)
 	len_y = 0;
 	while (data()->map.grid[len_y])
 		len_y++;
-	len_x = ft_strlen(data()->map.grid[0]);
+	len_x = data()->map.longline;
 	if (len_y > index_y && index_y > -1 && len_x > index_x && index_x > -1
 		&& data()->map.grid[index_y][index_x] == '1')
 		return (1);
 	return (0);
 }
-
 
 void	move_player(void)
 {

@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/09/28 14:52:53 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/07 10:09:25 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,12 @@ int		check_ray_dir_righ_left(double angle);
 ///////////////// CUB3D RANDER /////////////////
 
 void	minimap_rander(void);
-void	ft_hook(void *param);
+void	game_loop(void *param);
 void	move_player(void);
 void	draw_player(void);
 int		set_color(int red, int green, int blue, int all);
-mlx_image_t	*init_image(char *path);
+void	apply_textures(void);
+void	color_floor_ceiling(void);
+void	render_walls(void);
 
 #endif
