@@ -6,7 +6,7 @@
 /*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/07 13:50:38 by abbaraka         ###   ########.fr       */
+/*   Updated: 2024/10/09 15:33:55 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_ray
 	double		wall_vert_x;
 	double		wall_vert_y;
 	double		distance;
+	double		x_text;
 	int			col_i;
 }				t_ray;
 
