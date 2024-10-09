@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/07 14:18:17 by abbaraka         ###   ########.fr       */
+/*   Updated: 2024/10/09 15:40:03 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,19 +71,17 @@ int			check_ray_dir_righ_left(double angle);
 
 ///////////////// CUB3D RANDER /////////////////
 
+void		load_textures(void);
 void		minimap_rander(void);
 void		game_loop(void *param);
 void		move_player(void);
 void		draw_player(void);
 int			set_color(int red, int green, int blue, int all);
-void		apply_textures(void);
-void		color_floor_ceiling(void);
 void		render_walls(void);
 void		minimap_rander(void);
-void		ft_hook(void *param);
 void		move_player(void);
 void		draw_player(void);
 int			set_color(int red, int green, int blue, int all);
-mlx_image_t	*init_image(char *path);
+void		draw_image(uint32_t x, uint32_t h);
 
 #endif

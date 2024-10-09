@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:11:55 by abadouab          #+#    #+#             */
-/*   Updated: 2024/09/28 18:54:34 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/09 14:35:56 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static void	init_map_loader(void)
 		if (*line == '\n')
 			error_hanlder("Invalid " YELLOW "<Map>" RESET);
 		lenline = strlen_set(line, '\n');
-		if (lenline > data()->map.longline)
-			data()->map.longline = lenline;
+		if (lenline > data()->map.width)
+			data()->map.width = lenline;
 		(data()->map).load = ft_strjoin(data()->map.load, line);
 	}
 }
@@ -68,10 +68,10 @@ static void	is_map_surrounded(t_map *map, int height)
 			continue ;
 		if (set_player_angle(grid[height][width]) == true)
 		{
-			data()->player.pos_x = width * TILE + (TILE / 2);
-			data()->player.pos_y = height * TILE + (TILE / 2);
+			data()->player.pos.x = width * TILE + (TILE / 2);
+			data()->player.pos.y = height * TILE + (TILE / 2);
 		}
-		if (!height || !width || !grid[height + 1] || width == map->longline - 1
+		if (!height || !width || !grid[height + 1] || width == map->width - 1
 			|| grid[height + 1][width] == ' ' || grid[height - 1][width] == ' '
 			|| grid[height][width + 1] == ' ' || grid[height][width - 1] == ' ')
 			error_hanlder("Invalid " YELLOW "<Map>" RESET);
@@ -94,7 +94,7 @@ void	parse_map(void)
 	if (map_invalid_symbols(data()->map.load) == true)
 		error_hanlder("Invalid " YELLOW "<Map>" RESET);
 	(data()->map).grid = ft_split(data()->map.load, '\n');
-	normalize_map_shape(data()->map.grid, data()->map.longline);
+	normalize_map_shape(data()->map.grid, data()->map.width);
 	while (data()->map.grid[height])
 		is_map_surrounded(&data()->map, height++);
 }
