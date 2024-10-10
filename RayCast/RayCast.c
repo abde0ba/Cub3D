@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:15:35 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/09 14:45:32 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/10 10:11:52 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	cast_the_ray_horz(t_ray *ray)
 	step.y = TILE;
 	if (!check_ray_dir_down_up(ray->angle))
 		step.y *= -1;
-	step.x = step.y / tan(ray->angle);
+	step.x = TILE / tan(ray->angle);
 	if (check_ray_dir_righ_left(ray->angle) && step.x < 0)
 		step.x *= -1;
 	if (!check_ray_dir_righ_left(ray->angle) && step.x > 0)
@@ -52,7 +52,7 @@ int	cast_the_ray_vert(t_ray *ray)
 	step.x = TILE;
 	if (!check_ray_dir_righ_left(ray->angle))
 		step.x *= -1;
-	step.y = step.x * tan(ray->angle);
+	step.y = TILE * tan(ray->angle);
 	if (!check_ray_dir_down_up(ray->angle) && step.y > 0)
 		step.y *= -1;
 	if (check_ray_dir_down_up(ray->angle) && step.y < 0)
@@ -86,9 +86,9 @@ void	cast_the_ray(int i)
 	else
 		vert_touch = MAXFLOAT;
 	if (horz_touch > vert_touch)
-		ray.distance = vert_touch;
+		(1) && (ray.distance = vert_touch, ray.x_text = ray.wall_vert.x);
 	else
-		ray.distance = horz_touch;
+		(1) && (ray.distance = horz_touch, ray.x_text = ray.wall_horz.x);
 	data()->rays[i] = ray;
 }
 
@@ -105,6 +105,7 @@ void	raycasting(void)
 		data()->rays[i].col_i = i;
 		data()->rays[i].angle = ranging_angle(angle);
 		cast_the_ray(i);
+		render_walls(i);
 		angle += (FOV / (WIN_WIDTH));
 		i++;
 	}

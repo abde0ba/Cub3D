@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 12:16:39 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/09 15:23:54 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/10 09:52:50 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ static void	color_floor_ceiling(void)
 	}
 }
 
-// static void	apply_textures(int x, double y, double height)
-// {
-// 	;
-// }
-
-void	render_walls(void)
+void	render_walls(int ray)
 {
+	// double	wall_height;
+	// double	ray_distance;
+
+	(void)ray;
 	color_floor_ceiling();
+	
 }

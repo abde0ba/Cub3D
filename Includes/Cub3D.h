@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/09 15:40:03 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:40:12 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 ///////////////// CUB3D MACROS /////////////////
 
-# define TILE 30
+# define TILE 120
 # define FOV 1.0471975511965976 // 60 degrees in radians
 
 ///////////////// CUB3D COLORS /////////////////
@@ -77,7 +77,7 @@ void		game_loop(void *param);
 void		move_player(void);
 void		draw_player(void);
 int			set_color(int red, int green, int blue, int all);
-void		render_walls(void);
+void		render_walls(int ray);
 void		minimap_rander(void);
 void		move_player(void);
 void		draw_player(void);

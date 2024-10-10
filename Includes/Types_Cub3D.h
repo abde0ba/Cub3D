@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/09 14:40:05 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/09 16:14:24 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_ray
 	t_coordinates	wall_horz;
 	t_coordinates	wall_vert;
 	double			distance;
+	double			x_text;
 	int				col_i;
 }					t_ray;
 

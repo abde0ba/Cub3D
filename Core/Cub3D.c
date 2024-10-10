@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:45 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/09 16:02:11 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/10 09:53:36 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	main(int ac, char **av)
 	if (!data()->mlx)
 		error_hanlder(YELLOW "<mlx>" RESET " Failed");
 	load_textures();
-	draw_image(200, 200);
 	mlx_loop_hook(data()->mlx, game_loop, NULL);
 	mlx_cursor_hook(data()->mlx, mouse_move, NULL);
 	mlx_loop(data()->mlx);
