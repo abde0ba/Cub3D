@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 22:02:18 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/10 10:11:44 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/10 12:11:18 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void	render(void)
 	data()->player.rot.direction = 0;
 	data()->player.walk.direction = 0;
 	data()->player.l_r.direction = 0;
-	free(data()->rays);
 }
 
 void	game_loop(void *param)

@@ -3,8 +3,8 @@ SO      Textures/image.png
 WE      Textures/image.png
 EA      Textures/player.png         
 
-F 100,100,150
-C 150,100,150
+F 040,040,040
+C 180,180,180
 
 111111111111111111111111111111111
 1E0000000000000000110000000000001

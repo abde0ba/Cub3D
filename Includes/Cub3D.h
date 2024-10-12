@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/09 18:40:12 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/12 18:42:07 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,10 @@ void		game_loop(void *param);
 void		move_player(void);
 void		draw_player(void);
 int			set_color(int red, int green, int blue, int all);
-void		render_walls(int ray);
+void		render_walls(int ray, double angle);
 void		minimap_rander(void);
 void		move_player(void);
 void		draw_player(void);
 int			set_color(int red, int green, int blue, int all);
-void		draw_image(uint32_t x, uint32_t h);
 
 #endif

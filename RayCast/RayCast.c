@@ -6,13 +6,13 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:15:35 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/10 10:11:52 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/12 18:42:00 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
 
-int	cast_the_ray_horz(t_ray *ray)
+static int	cast_the_ray_horz(t_ray *ray)
 {
 	t_coordinates	inter;
 	t_coordinates	next_on_wall;
@@ -38,7 +38,7 @@ int	cast_the_ray_horz(t_ray *ray)
 	return (0);
 }
 
-int	cast_the_ray_vert(t_ray *ray)
+static int	cast_the_ray_vert(t_ray *ray)
 {
 	t_coordinates	inter;
 	t_coordinates	next_on_wall;
@@ -64,32 +64,31 @@ int	cast_the_ray_vert(t_ray *ray)
 	return (0);
 }
 
-void	cast_the_ray(int i)
+static void	cast_the_ray(t_ray *ray)
 {
-	t_ray	ray;
 	double	horz_touch;
 	double	vert_touch;
 
-	(1) && (ray = data()->rays[i], horz_touch = 0, vert_touch = 0);
-	if (cast_the_ray_horz(&ray))
+	horz_touch = 0;
+	vert_touch = 0;
+	if (cast_the_ray_horz(ray))
 	{
 		horz_touch = calc_dist(data()->player.pos.x, data()->player.pos.y, \
-		ray.wall_horz.x, ray.wall_horz.y);
+		ray->wall_horz.x, ray->wall_horz.y);
 	}
 	else
 		horz_touch = MAXFLOAT;
-	if (cast_the_ray_vert(&ray))
+	if (cast_the_ray_vert(ray))
 	{
 		vert_touch = calc_dist(data()->player.pos.x, data()->player.pos.y, \
-		ray.wall_vert.x, ray.wall_vert.y);
+		ray->wall_vert.x, ray->wall_vert.y);
 	}
 	else
 		vert_touch = MAXFLOAT;
 	if (horz_touch > vert_touch)
-		(1) && (ray.distance = vert_touch, ray.x_text = ray.wall_vert.x);
+		(1) && (ray->distance = vert_touch, ray->hit_point = ray->wall_vert.x);
 	else
-		(1) && (ray.distance = horz_touch, ray.x_text = ray.wall_horz.x);
-	data()->rays[i] = ray;
+		(1) && (ray->distance = horz_touch, ray->hit_point = ray->wall_horz.x);
 }
 
 void	raycasting(void)
@@ -102,11 +101,11 @@ void	raycasting(void)
 	data()->rays = ft_calloc(WIN_WIDTH, sizeof(t_ray));
 	while (i < WIN_WIDTH)
 	{
-		data()->rays[i].col_i = i;
 		data()->rays[i].angle = ranging_angle(angle);
-		cast_the_ray(i);
-		render_walls(i);
+		cast_the_ray(&data()->rays[i]);
+		render_walls(i, data()->rays[i].angle);
 		angle += (FOV / (WIN_WIDTH));
 		i++;
 	}
+	free(data()->rays);
 }
