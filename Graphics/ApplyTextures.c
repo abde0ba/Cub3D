@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 12:16:39 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/12 18:42:01 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/14 11:57:57 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	put_pixel(int ray, int y)
 	uint8_t			*pixels;
 	uint32_t		color;
 
-	p = y * 4;
+	p = 10;
 	pixels = data()->images.north->pixels;
 	color = set_color(pixels[p], pixels[p + 1], pixels[p + 2], pixels[p + 3]);
 	mlx_put_pixel(data()->images.screen, ray, y, color);
@@ -47,8 +47,8 @@ void	render_walls(int ray, double angle)
 	double	ray_distance;
 
 	y_axis = 0;
-	angle_offset = cos(angle - data()->player.angle);
-	ray_distance = data()->rays[ray].distance * angle_offset;
+	angle_offset = angle - data()->player.angle;
+	ray_distance = data()->rays[ray].distance * cos(angle_offset);
 	wall_height = (TILE / ray_distance) * (WIN_WIDTH / 2) / tan(FOV / 2);
 	while (y_axis < WIN_HEIGHT)
 	{

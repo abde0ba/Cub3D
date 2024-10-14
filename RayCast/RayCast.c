@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:15:35 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/12 18:42:00 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/14 09:16:32 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	raycasting(void)
 		data()->rays[i].angle = ranging_angle(angle);
 		cast_the_ray(&data()->rays[i]);
 		render_walls(i, data()->rays[i].angle);
-		angle += (FOV / (WIN_WIDTH));
+		angle += FOV / WIN_WIDTH;
 		i++;
 	}
 	free(data()->rays);
