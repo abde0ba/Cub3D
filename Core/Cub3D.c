@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:45 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/10 09:53:36 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:58:02 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_cub3d	*data(void)
 		ft_bzero(&data, sizeof(t_cub3d));
 		data.player.rot.speed = (M_PI / 180);
 		data.player.walk.speed = TILE / 20;
+		data.game.proj_depth = WIN_WIDTH / 2 / tan(FOV / 2);
 		set = 1;
 	}
 	return (&data);

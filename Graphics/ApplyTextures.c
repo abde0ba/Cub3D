@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 12:16:39 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/14 11:57:57 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:46:08 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	color_floor_ceiling(int ray, int y, double wall_start, double wall_end)
 {
 	if (y < wall_start)
-		mlx_put_pixel(data()->images.screen, ray, y, data()->colors.floor);
+		mlx_put_pixel(data()->game.screen, ray, y, data()->colors.floor);
 	else if (y > wall_end)
-		mlx_put_pixel(data()->images.screen, ray, y, data()->colors.ceiling);
+		mlx_put_pixel(data()->game.screen, ray, y, data()->colors.ceiling);
 }
 
 void	put_pixel(int ray, int y)
@@ -29,7 +29,7 @@ void	put_pixel(int ray, int y)
 	p = 10;
 	pixels = data()->images.north->pixels;
 	color = set_color(pixels[p], pixels[p + 1], pixels[p + 2], pixels[p + 3]);
-	mlx_put_pixel(data()->images.screen, ray, y, color);
+	mlx_put_pixel(data()->game.screen, ray, y, color);
 }
 
 void	apply_texture_to_ray(int ray, int y, double mid_win, double mid_wall)
@@ -39,17 +39,13 @@ void	apply_texture_to_ray(int ray, int y, double mid_win, double mid_wall)
 		put_pixel(ray, y);
 }
 
-void	render_walls(int ray, double angle)
+void	render_walls(t_game *game, int ray)
 {
 	int		y_axis;
 	double	wall_height;
-	double	angle_offset;
-	double	ray_distance;
 
 	y_axis = 0;
-	angle_offset = angle - data()->player.angle;
-	ray_distance = data()->rays[ray].distance * cos(angle_offset);
-	wall_height = (TILE / ray_distance) * (WIN_WIDTH / 2) / tan(FOV / 2);
+	wall_height = TILE / data()->rays[ray].distance * game->proj_depth;
 	while (y_axis < WIN_HEIGHT)
 	{
 		apply_texture_to_ray(ray, y_axis, WIN_HEIGHT / 2, wall_height / 2);
