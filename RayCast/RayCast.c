@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:15:35 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/15 11:17:02 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/15 17:25:32 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,14 @@ static void remove_distortion(t_ray *ray, t_wall *wall, double horz_touch, doubl
 {
 	ray->distance = horz_touch;
 	ray->hit_point = ray->wall_horz.x;
-	data()->game.current = data()->images.south;
-	if (ray->wall_horz.x > data()->player.pos.x)
-		data()->game.current = data()->images.north;
 	if (horz_touch > vert_touch)
 	{
-		data()->game.current = data()->images.east;
-		if (ray->wall_vert.x > data()->player.pos.x)
-			data()->game.current = data()->images.west;
 		ray->distance = vert_touch;
-		ray->hit_point = ray->wall_vert.x;
+		ray->hit_point = ray->wall_vert.y;
+		ray->is_vert = true;
 	}
 	ray->distance *= cos(ray->angle - data()->player.angle);
-	wall->height = TILE / ray->distance * data()->game.proj_depth;
+	wall->height = TILE / ray->distance * game()->proj_depth;
 	wall->start = (WIN_HEIGHT / 2) - (wall->height / 2);
 	wall->end = (WIN_HEIGHT / 2) + (wall->height / 2);
 }

@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 22:02:18 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/14 17:47:47 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/15 17:22:58 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 static void	render(void)
 {
 	move_player();
-	if (data()->game.screen)
-		mlx_delete_image(data()->mlx, data()->game.screen);
-	(data()->game).screen = mlx_new_image(data()->mlx, WIN_WIDTH, WIN_HEIGHT);
-	if (data()->game.screen == NULL)
+	if (game()->screen)
+		mlx_delete_image(data()->mlx, game()->screen);
+	game()->screen = mlx_new_image(data()->mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (game()->screen == NULL)
 		error_hanlder(YELLOW "<mlx>" RESET " Failed");
 	raycasting();
 	minimap_rander();
-	mlx_image_to_window(data()->mlx, data()->game.screen, 0, 0);
+	mlx_image_to_window(data()->mlx, game()->screen, 0, 0);
 	data()->player.rot.direction = 0;
 	data()->player.walk.direction = 0;
 	data()->player.l_r.direction = 0;

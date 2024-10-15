@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 10:16:12 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/14 17:46:53 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/15 17:23:57 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	put_pixels(int x, int y, int color)
 {
-	mlx_put_pixel(data()->game.screen, x, y, color);
+	mlx_put_pixel(game()->screen, x, y, color);
 }
 
 void	draw_player(void)

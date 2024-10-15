@@ -6,15 +6,29 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:45 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/15 10:33:55 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/15 17:19:47 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
 
+t_game	*game(void)
+{
+	static bool			set;
+	static t_game		data;
+
+	if (set == 0)
+	{
+		ft_bzero(&data, sizeof(t_game));
+		data.proj_depth = (WIN_WIDTH / 2) / tan(FOV / 2);
+		set = 1;
+	}
+	return (&data);
+}
+
 t_cub3d	*data(void)
 {
-	static short		set;
+	static bool			set;
 	static t_cub3d		data;
 
 	if (set == 0)
@@ -22,7 +36,6 @@ t_cub3d	*data(void)
 		ft_bzero(&data, sizeof(t_cub3d));
 		data.player.rot.speed = (M_PI / 180);
 		data.player.walk.speed = TILE / 20;
-		data.game.proj_depth = (WIN_WIDTH / 2) / tan(FOV / 2);
 		set = 1;
 	}
 	return (&data);

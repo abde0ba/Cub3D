@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/15 10:32:20 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/15 17:20:44 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 ///////////////// CUB3D PARSER /////////////////
 
 t_cub3d		*data(void);
+t_game		*game(void);
 void		error_hanlder(char *message);
 void		parser(void);
 void		parse_map(void);
