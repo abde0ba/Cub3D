@@ -6,22 +6,31 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:15:35 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/14 17:45:18 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/15 11:17:02 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
 
-static void remove_distortion(t_ray *ray, double horz_touch, double vert_touch)
+static void remove_distortion(t_ray *ray, t_wall *wall, double horz_touch, double vert_touch)
 {
 	ray->distance = horz_touch;
 	ray->hit_point = ray->wall_horz.x;
+	data()->game.current = data()->images.south;
+	if (ray->wall_horz.x > data()->player.pos.x)
+		data()->game.current = data()->images.north;
 	if (horz_touch > vert_touch)
 	{
+		data()->game.current = data()->images.east;
+		if (ray->wall_vert.x > data()->player.pos.x)
+			data()->game.current = data()->images.west;
 		ray->distance = vert_touch;
 		ray->hit_point = ray->wall_vert.x;
 	}
 	ray->distance *= cos(ray->angle - data()->player.angle);
+	wall->height = TILE / ray->distance * data()->game.proj_depth;
+	wall->start = (WIN_HEIGHT / 2) - (wall->height / 2);
+	wall->end = (WIN_HEIGHT / 2) + (wall->height / 2);
 }
 
 static int	cast_the_ray_horz(t_ray *ray)
@@ -81,6 +90,7 @@ static void	cast_the_ray(int index, t_ray *ray)
 	double	horz_touch;
 	double	vert_touch;
 
+	ray->index = index;
 	horz_touch = MAXFLOAT;
 	vert_touch = MAXFLOAT;
 	if (cast_the_ray_horz(ray))
@@ -93,8 +103,8 @@ static void	cast_the_ray(int index, t_ray *ray)
 		vert_touch = calc_dist(data()->player.pos.x, data()->player.pos.y, \
 		ray->wall_vert.x, ray->wall_vert.y);
 	}
-	remove_distortion(ray, horz_touch, vert_touch);
-	render_walls(&data()->game, index);
+	remove_distortion(ray, &data()->wall, horz_touch, vert_touch);
+	render_walls(ray, &data()->wall);
 }
 
 void	raycasting(void)
