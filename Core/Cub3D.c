@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:45 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/14 17:58:02 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/14 20:32:53 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,45 @@ t_cub3d	*data(void)
 		set = 1;
 	}
 	return (&data);
+}
+
+void	get_doors()
+{
+	int		i;
+	int		j;
+	int		counter;
+	int		index;
+	t_door	*doors;
+
+	i = 0;
+	while(data()->map.grid[i])
+	{
+		j = 0;
+		while(data()->map.grid[i][j])
+		{
+			if (data()->map.grid[i][j] == 'D')
+				counter++;
+			j++;
+		}
+		i++;
+	}
+	doors = malloc(counter * sizeof(t_door));
+	if (!doors)
+		(cleanup(), exit(1));
+	i = 0;
+	index = 0;
+	while(data()->map.grid[i])
+	{
+		j = 0;
+		while(data()->map.grid[i][j])
+		{
+			if (data()->map.grid[i][j] == 'D')
+				(1) && (doors[index].coords.y = i, doors[index].coords.x = j,
+					doors[index].state = 1);
+			j++;
+		}
+		i++;
+	}
 }
 
 void	mouse_move(double a, double b, void *param)
@@ -49,6 +88,7 @@ int	main(int ac, char **av)
 	data()->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cub3D", false);
 	if (!data()->mlx)
 		error_hanlder(YELLOW "<mlx>" RESET " Failed");
+	get_doors();
 	load_textures();
 	mlx_loop_hook(data()->mlx, game_loop, NULL);
 	mlx_cursor_hook(data()->mlx, mouse_move, NULL);

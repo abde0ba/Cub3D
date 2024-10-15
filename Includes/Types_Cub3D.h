@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Types_Cub3D.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/14 17:56:26 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/14 19:32:05 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,21 @@
 
 # include "MLX42.h"
 
+
 // Struct For x And y Coordinates
 typedef struct s_coordinates
 {
 	double			x;				// X coordinate
 	double			y;				// Y coordinate
 }					t_coordinates;
+
+// Struct For Doors
+typedef struct	s_door
+{
+	t_coordinates	coords;
+	int				state;
+	
+}				t_door;
 
 // Struct for ray information used in raycasting
 typedef struct s_ray
