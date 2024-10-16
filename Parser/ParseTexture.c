@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:11:18 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/09 09:49:34 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/16 10:31:08 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ char	*parse_texture(char *object)
 	duplicated_elements(*data()->map.load);
 	file = open(object, O_RDONLY);
 	if (file == ERROR)
-		error_hanlder("Invalid " YELLOW "<Map>" RESET);
+		error_hanlder(mlx_strerror(MLX_INVFILE));
 	return (close(file), object);
 }

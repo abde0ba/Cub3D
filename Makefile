@@ -6,13 +6,14 @@
 #    By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/16 12:39:22 by abadouab          #+#    #+#              #
-#    Updated: 2024/10/09 13:12:00 by abadouab         ###   ########.fr        #
+#    Updated: 2024/10/16 09:40:07 by abadouab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	Cub3D
 
 SRCS		=	Core/Cub3D.c \
+				Core/Objects.c \
 				Parser/Parser.c \
 				Parser/ParseMap.c \
 				Parser/ParseColor.c \
@@ -38,7 +39,7 @@ CLIB		=	CLib
 ARLIB		=	CLib/libar.a
 
 CC			=	cc
-FLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
+FLAGS		=	-Wall -Wextra -Werror # -g -fsanitize=address
 RM			=	rm -fr
 
 SHORT		=	-L$(CLIB) -lar -L $(MLX) -l mlx42 -lglfw

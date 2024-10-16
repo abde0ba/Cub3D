@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:15:35 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/15 17:25:32 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/16 09:35:09 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void remove_distortion(t_ray *ray, t_wall *wall, double horz_touch, doubl
 		ray->is_vert = true;
 	}
 	ray->distance *= cos(ray->angle - data()->player.angle);
-	wall->height = TILE / ray->distance * game()->proj_depth;
+	wall->height = TILE / ray->distance * core()->proj_depth;
 	wall->start = (WIN_HEIGHT / 2) - (wall->height / 2);
 	wall->end = (WIN_HEIGHT / 2) + (wall->height / 2);
 }

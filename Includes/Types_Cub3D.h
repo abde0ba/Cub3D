@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/15 16:13:34 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/16 09:33:37 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_move
 // Struct for core game elements and rendering
 typedef struct s_game
 {
+	mlx_t			*mlx;			// Pointer to Main MLX
 	mlx_image_t		*screen;		// Main image to draw pixels
 	mlx_texture_t	*current;		// Texture (current direction)
 	double			proj_depth;		// Distance to the projection plane
@@ -108,7 +109,6 @@ typedef struct s_ray
 // Main Cub3D struct integrating all components
 typedef struct s_cub3d
 {
-	mlx_t			*mlx;			// Pointer to Main MLX
 	t_map			map;			// The map data and layout
 	t_textures		textures;		// Texture images (Path)
 	t_image			images;			// Laod images (Textures)
