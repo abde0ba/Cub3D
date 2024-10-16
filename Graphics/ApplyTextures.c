@@ -6,49 +6,59 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 12:16:39 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/14 17:46:08 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/15 17:48:07 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
 
-void	color_floor_ceiling(int ray, int y, double wall_start, double wall_end)
+void	get_textures(t_ray *ray)
 {
-	if (y < wall_start)
-		mlx_put_pixel(data()->game.screen, ray, y, data()->colors.floor);
-	else if (y > wall_end)
-		mlx_put_pixel(data()->game.screen, ray, y, data()->colors.ceiling);
+	game()->current = data()->images.south;
+	if (ray->wall_horz.y > data()->player.pos.y)
+		game()->current = data()->images.north;
+	if (ray->is_vert && ray->wall_vert.x > data()->player.pos.x)
+		game()->current = data()->images.east;
+	else if (ray->is_vert && ray->wall_vert.x <= data()->player.pos.x)
+		game()->current = data()->images.west;
 }
 
-void	put_pixel(int ray, int y)
+void	color_floor_ceiling(int ray, int y)
 {
-	uint32_t		p;
-	uint8_t			*pixels;
-	uint32_t		color;
+	if (y < data()->wall.start)
+		mlx_put_pixel(game()->screen, ray, y, data()->colors.floor);
+	else if (y > data()->wall.end)
+		mlx_put_pixel(game()->screen, ray, y, data()->colors.ceiling);
+}
 
-	p = 10;
-	pixels = data()->images.north->pixels;
+void	apply_texture_to_ray(t_wall *wall, int x_axis, int y_axis)
+{
+	uint32_t	p;
+	uint32_t	color;
+	uint8_t		*pixels;
+
+	pixels = game()->current->pixels;
+	wall->offset_y = y_axis - wall->start;
+	wall->offset_y *= game()->current->height / wall->height;
+	p = game()->current->width * wall->offset_y + wall->offset_x;
+	p *= game()->current->bytes_per_pixel;
 	color = set_color(pixels[p], pixels[p + 1], pixels[p + 2], pixels[p + 3]);
-	mlx_put_pixel(data()->game.screen, ray, y, color);
+	mlx_put_pixel(game()->screen, x_axis, y_axis, color);
 }
 
-void	apply_texture_to_ray(int ray, int y, double mid_win, double mid_wall)
-{
-	color_floor_ceiling(ray, y, mid_win - mid_wall, mid_win + mid_wall);
-	if (y >= mid_win - mid_wall && y <= mid_win + mid_wall)
-		put_pixel(ray, y);
-}
-
-void	render_walls(t_game *game, int ray)
+void	render_walls(t_ray *ray, t_wall *wall)
 {
 	int		y_axis;
-	double	wall_height;
 
 	y_axis = 0;
-	wall_height = TILE / data()->rays[ray].distance * game->proj_depth;
+	get_textures(ray);
+	wall->offset_x = (int)(ray->hit_point * game()->current->width / TILE);
+	wall->offset_x %= game()->current->width;
 	while (y_axis < WIN_HEIGHT)
 	{
-		apply_texture_to_ray(ray, y_axis, WIN_HEIGHT / 2, wall_height / 2);
+		color_floor_ceiling(ray->index, y_axis);
+		if (y_axis >= wall->start && y_axis <= wall->end)
+			apply_texture_to_ray(wall, ray->index, y_axis);
 		y_axis++;
 	}
 }

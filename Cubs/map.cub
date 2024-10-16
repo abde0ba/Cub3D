@@ -1,13 +1,13 @@
-NO      Textures/image.png
-SO      Textures/image.png
-WE      Textures/image.png
-EA      Textures/player.png         
+NO      Textures/game.png
+SO      Textures/game.png
+WE      Textures/game.png
+EA      Textures/game.png         
 
 F 040,040,040
 C 180,180,180
 
 111111111111111111111111111111111
-1E0000000000000000110000000000001
+1E000000D000000000110000000000001
 100000001011000001110000000000001
 100000001001000000000000000000001
 111111111011000001110000000000001

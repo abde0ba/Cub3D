@@ -6,7 +6,7 @@
 /*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/14 19:32:05 by abbaraka         ###   ########.fr       */
+/*   Updated: 2024/10/15 21:53:37 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,41 +31,49 @@ typedef struct	s_door
 	
 }				t_door;
 
-// Struct for ray information used in raycasting
-typedef struct s_ray
-{
-	double			angle;			// Angle of the ray
-	double			distance;		// Distance to the closest wall
-	double			hit_point;		// Point of impact on the wall
-	t_coordinates	wall_horz;		// Intersection point (horizontal walls)
-	t_coordinates	wall_vert;		// Intersection point (vertical walls)
-}					t_ray;
-
 // Struct for player direction and moves
 typedef struct s_move
 {
-	double			speed;			// Player's movement speed
 	int				direction;		// Player's direction (angle)
+	double			speed;			// Player's movement speed
 }					t_move;
 
-// Struct for player information
-typedef struct s_player
+// Struct for core game elements and rendering
+typedef struct s_game
 {
-	t_coordinates	pos;			// Player's coordinates
-	double			angle;			// Player's direction (angle)
-	t_move			rot;			// Player's view direction
-	t_move			walk;			// Player's walk direction move
-	t_move			l_r;			// Player's left and right direction move
-}					t_player;
+	mlx_image_t		*screen;		// Main image to draw pixels
+	mlx_texture_t	*current;		// Texture (current direction)
+	double			proj_depth;		// Distance to the projection plane
+}					t_game;
+
+// Struct for wall rendering information
+typedef struct s_wall
+{
+	uint32_t		offset_x;		// X texture offset
+	uint32_t		offset_y;		// Y texture offset
+	double			end;			// Y-coordinate where the wall ends
+	double			start;			// Y-coordinate where the wall starts
+	double			height;			// Wall height in projection
+}					t_wall;
 
 // Struct for map data
 typedef struct s_map
 {
+	int				file;			// File Descriptor Map
+	int				width;			// The Map width (line width)
 	char			*load;			// loading map file data
 	char			**grid;			// 2D array for map grid
-	short			file;			// File Descriptor Map
-	int				width;			// The Map width (line width)
 }					t_map;
+
+// Struct for player information
+typedef struct s_player
+{
+	double			angle;			// Player's direction (angle)
+	t_move			rot;			// Player's view direction
+	t_move			walk;			// Player's walk direction move
+	t_move			l_r;			// Player's left and right direction move
+	t_coordinates	pos;			// Player's coordinates
+}					t_player;
 
 // Struct for textures (Path)
 typedef struct s_textures
@@ -88,30 +96,37 @@ typedef struct s_image
 // Struct for floor and ceiling colors
 typedef struct s_colors
 {
-	int				floor;			// Floor color Value
-	int				setfloor;		// Floor color set
-	int				ceiling;		// Ceiling color Value
-	int				setceiling;		// Ceiling color set
+	bool			setfloor;		// Floor color set
+	bool			setceiling;		// Ceiling color set
+	uint32_t		floor;			// Floor color Value
+	uint32_t		ceiling;		// Ceiling color Value
 }					t_colors;
 
-// Struct for core game elements and rendering
-typedef struct s_game
+// Struct for ray information used in raycasting
+typedef struct s_ray
 {
-	mlx_image_t		*screen;		// Main image to draw pixels
-	double			proj_depth;		// Distance to the projection plane
-}					t_game;				
+	int				index;			// Index number of this ray
+	double			angle;			// Angle of the ray
+	double			distance;		// Distance to the closest wall
+	double			hit_point;		// Point of impact on the wall
+	double			is_vert;		// Point of impact on the wall
+	t_coordinates	wall_horz;		// Intersection point (horizontal walls)
+	t_coordinates	wall_vert;		// Intersection point (vertical walls)
+}					t_ray;
 
 // Main Cub3D struct integrating all components
 typedef struct s_cub3d
 {
-	t_game			game;			// Main Data (Almost Is constants)
 	mlx_t			*mlx;			// Pointer to Main MLX
 	t_map			map;			// The map data and layout
 	t_textures		textures;		// Texture images (Path)
 	t_image			images;			// Laod images (Textures)
 	t_colors		colors;			// Floor and ceiling colors
 	t_player		player;			// Player information
+	t_wall			wall;			// Wall rendering information
 	t_ray			*rays;			// Ray information
+	t_door			*doors;			// Door information
+	int				d_number;			// Door Numbers
 }					t_cub3d;
 
 #endif

@@ -6,15 +6,29 @@
 /*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:45 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/14 20:32:53 by abbaraka         ###   ########.fr       */
+/*   Updated: 2024/10/15 21:58:56 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
 
+t_game	*game(void)
+{
+	static bool			set;
+	static t_game		data;
+
+	if (set == 0)
+	{
+		ft_bzero(&data, sizeof(t_game));
+		data.proj_depth = (WIN_WIDTH / 2) / tan(FOV / 2);
+		set = 1;
+	}
+	return (&data);
+}
+
 t_cub3d	*data(void)
 {
-	static short		set;
+	static bool			set;
 	static t_cub3d		data;
 
 	if (set == 0)
@@ -22,21 +36,18 @@ t_cub3d	*data(void)
 		ft_bzero(&data, sizeof(t_cub3d));
 		data.player.rot.speed = (M_PI / 180);
 		data.player.walk.speed = TILE / 20;
-		data.game.proj_depth = WIN_WIDTH / 2 / tan(FOV / 2);
 		set = 1;
 	}
 	return (&data);
 }
 
-void	get_doors()
+void	count_and_allocate_doors()
 {
 	int		i;
 	int		j;
 	int		counter;
-	int		index;
-	t_door	*doors;
-
-	i = 0;
+	
+	(1) && (i = 0, counter = 0);
 	while(data()->map.grid[i])
 	{
 		j = 0;
@@ -48,19 +59,29 @@ void	get_doors()
 		}
 		i++;
 	}
-	doors = malloc(counter * sizeof(t_door));
-	if (!doors)
-		(cleanup(), exit(1));
-	i = 0;
-	index = 0;
+	data()->doors = allocate(counter, sizeof(t_door));
+	data()->d_number = counter;
+	// if (!doors)
+	// 	(cleanup(), exit(1));
+}
+
+void	get_doors()
+{
+	int		i;
+	int		j;
+	int		index;
+
+	count_and_allocate_doors();
+	(1) && (i = 0, index = 0);
 	while(data()->map.grid[i])
 	{
 		j = 0;
 		while(data()->map.grid[i][j])
 		{
 			if (data()->map.grid[i][j] == 'D')
-				(1) && (doors[index].coords.y = i, doors[index].coords.x = j,
-					doors[index].state = 1);
+				(1) && (data()->doors[index].coords.y = i,
+				data()->doors[index].coords.x = j,
+				data()->doors[index].state = 1);
 			j++;
 		}
 		i++;
