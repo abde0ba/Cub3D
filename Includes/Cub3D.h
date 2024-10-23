@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/16 10:18:52 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/22 18:57:18 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
+# define MINIMAP 160
 
 ///////////////// CUB3D MACROS /////////////////
 
@@ -76,11 +77,9 @@ void		load_textures(void);
 void		minimap_rander(void);
 void		game_loop(void *param);
 void		move_player(void);
-void		draw_player(void);
 void		render_walls(t_ray *ray, t_wall *wall);
-void		minimap_rander(void);
 void		move_player(void);
-void		draw_player(void);
-uint32_t	set_color(uint32_t red, uint32_t green, uint32_t blue, uint32_t all);
+uint		set_color(uint red, uint green, uint blue, uint all);
+void		get_textures(t_ray *ray);
 
 #endif
