@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 19:21:42 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/16 10:33:08 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/22 18:36:12 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	error_hanlder(const char *message)
 	cleanup();
 	if (data()->map.file != ERROR)
 		exit(data()->map.file);
+	if (core()->screen)
+		mlx_delete_image(core()->mlx, core()->screen);
 	if (core()->mlx)
 		mlx_terminate(core()->mlx);
 	exit(EXIT_FAILURE);

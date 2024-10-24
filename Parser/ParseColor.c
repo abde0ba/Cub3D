@@ -6,13 +6,13 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:11:20 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/15 08:29:31 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/23 15:06:29 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
 
-uint32_t	set_color(uint32_t red, uint32_t green, uint32_t blue, uint32_t all)
+uint	set_color(uint red, uint green, uint blue, uint all)
 {
 	return (red << 24 | green << 16 | blue << 8 | all);
 }

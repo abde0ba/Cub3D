@@ -6,7 +6,7 @@
 /*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 22:02:18 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/24 16:25:03 by abbaraka         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:44:14 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void	render(void)
 	doors_should_open_or_close();
 	raycasting();
 	minimap_rander();
-	mlx_image_to_window(core()->mlx, core()->screen, 0, 0);
 	data()->player.rot.direction = 0;
 	data()->player.walk.direction = 0;
 	data()->player.l_r.direction = 0;
