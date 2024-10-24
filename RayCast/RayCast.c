@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   RayCast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:15:35 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/15 17:25:32 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:26:52 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
 
-static void remove_distortion(t_ray *ray, t_wall *wall, double horz_touch, double vert_touch)
+static void	remove_distortion(t_ray *ray, t_wall *wall,
+	double horz_touch, double vert_touch)
 {
 	ray->distance = horz_touch;
 	ray->hit_point = ray->wall_horz.x;
@@ -23,7 +24,7 @@ static void remove_distortion(t_ray *ray, t_wall *wall, double horz_touch, doubl
 		ray->is_vert = true;
 	}
 	ray->distance *= cos(ray->angle - data()->player.angle);
-	wall->height = TILE / ray->distance * game()->proj_depth;
+	wall->height = TILE / ray->distance * core()->proj_depth;
 	wall->start = (WIN_HEIGHT / 2) - (wall->height / 2);
 	wall->end = (WIN_HEIGHT / 2) + (wall->height / 2);
 }

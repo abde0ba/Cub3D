@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   Minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 10:16:12 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/15 17:23:57 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:30:00 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
-
-void	put_pixels(int x, int y, int color)
-{
-	mlx_put_pixel(game()->screen, x, y, color);
-}
 
 void	draw_player(void)
 {
@@ -32,14 +27,14 @@ void	draw_player(void)
 		j = x;
 		while (j < x + 5)
 		{
-			put_pixels(j, i, set_color(255, 255, 155, 255));
+			mlx_put_pixel(core()->screen, j, i, set_color(255, 255, 155, 255));
 			j++;
 		}
 		i++;
 	}
 	i = -1;
 	while (++i < 10)
-		put_pixels(x + cos(data()->player.angle) * i + 3,
+		mlx_put_pixel(core()->screen, x + cos(data()->player.angle) * i + 3,
 			y + sin(data()->player.angle) * i + 2,
 			set_color(255, 255, 155, 255));
 }
@@ -56,11 +51,13 @@ static void	draw_pixel(char color, int x, int y)
 		while (j < (x * 15) + 14)
 		{
 			if (color == 'r')
-				put_pixels(i, j, set_color(255, 255, 255, 255));
+				mlx_put_pixel(core()->screen, i, j,
+					set_color(255, 255, 255, 255));
 			else if (color == 'b')
-				put_pixels(i, j, set_color(0, 0, 0, 100));
+				mlx_put_pixel(core()->screen, i, j, set_color(0, 0, 0, 100));
 			else if (color == 'y')
-				put_pixels(i, j, set_color(255, 255, 0, 255));
+				mlx_put_pixel(core()->screen, i, j,
+					set_color(255, 255, 0, 255));
 			j++;
 		}
 		i++;
@@ -80,6 +77,9 @@ void	minimap_rander(void)
 		{
 			if (data()->map.grid[x][y] == '1')
 				draw_pixel('r', x, y);
+			else if (data()->map.grid[x][y] == 'D' && data()->doors \
+			[check_the_specific_door(x * TILE, y * TILE)].state == 0)
+				draw_pixel('y', x, y);
 			else if (data()->map.grid[x][y] != ' ')
 				draw_pixel('b', x, y);
 			y++;

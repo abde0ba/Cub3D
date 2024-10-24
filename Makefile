@@ -6,13 +6,14 @@
 #    By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/16 12:39:22 by abadouab          #+#    #+#              #
-#    Updated: 2024/10/15 19:04:23 by abbaraka         ###   ########.fr        #
+#    Updated: 2024/10/22 17:02:56 by abbaraka         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	Cub3D
 
 SRCS		=	Core/Cub3D.c \
+				Core/Objects.c \
 				Parser/Parser.c \
 				Parser/ParseMap.c \
 				Parser/ParseColor.c \
@@ -25,7 +26,9 @@ SRCS		=	Core/Cub3D.c \
 				Minimap/Minimap.c \
 				Graphics/LoadTextures.c \
 				Graphics/ApplyTextures.c \
-				Error/ErrorHandler.c
+				Error/ErrorHandler.c \
+				Doors/Doors.c \
+				Doors/Door_functions.c
 
 OBJS_DIR	=	.Objects/
 OBJS		=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))

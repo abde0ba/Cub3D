@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/15 17:20:44 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:33:43 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 
 ///////////////// CUB3D WINDOW /////////////////
 
-# define WIN_WIDTH 1280
-# define WIN_HEIGHT 720
+# define WIN_WIDTH 1600
+# define WIN_HEIGHT 900
 
 ///////////////// CUB3D MACROS /////////////////
 
@@ -46,8 +46,8 @@
 ///////////////// CUB3D PARSER /////////////////
 
 t_cub3d		*data(void);
-t_game		*game(void);
-void		error_hanlder(char *message);
+t_game		*core(void);
+void		error_hanlder(const char *message);
 void		parser(void);
 void		parse_map(void);
 int			parse_color(char *object);
@@ -70,7 +70,7 @@ int			check_player_in_wall(double y, double x);
 int			check_ray_dir_down_up(double angle);
 int			check_ray_dir_righ_left(double angle);
 
-///////////////// CUB3D RANDER /////////////////
+///////////////// CUB3D RENDER /////////////////
 
 void		load_textures(void);
 void		minimap_rander(void);
@@ -81,6 +81,16 @@ void		render_walls(t_ray *ray, t_wall *wall);
 void		minimap_rander(void);
 void		move_player(void);
 void		draw_player(void);
-uint32_t	set_color(uint32_t red, uint32_t green, uint32_t blue, uint32_t all);
+uint32_t	set_color(uint32_t red, uint32_t green,
+				uint32_t blue, uint32_t all);
+
+///////////////// DOOR FUNCTIONS /////////////////
+
+void		get_doors(void);
+int			check_if_door(double y, double x);
+int			check_the_specific_door(double y, double x);
+void		open_doors(void);
+void		doors_should_open_or_close(void);
+int			check_if_door_open_close(double y, double x);
 
 #endif

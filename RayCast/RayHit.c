@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RayHit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:06:24 by abbaraka          #+#    #+#             */
-/*   Updated: 2024/10/09 16:16:13 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:26:16 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ int	check_hit_ray_horz(t_ray *ray, t_coordinates next_on_wall,
 		{
 			ray->wall_horz.x = next_on_wall.x;
 			ray->wall_horz.y = next_on_wall.y;
+			if (data()->map.grid[(int)floor(ray->wall_horz.y / TILE)] \
+			[(int)floor(ray->wall_horz.x / TILE)] == 'D')
+				(1) && (ray->is_door = true);
 			return (1);
 		}
-		else
-			(1) && (next_on_wall.x += step.x, next_on_wall.y += step.y);
+		(1) && (next_on_wall.x += step.x, next_on_wall.y += step.y);
 	}
 	return (0);
 }
@@ -58,10 +60,12 @@ int	check_hit_ray_vert(t_ray *ray, t_coordinates next_on_wall,
 		{
 			ray->wall_vert.x = next_on_wall.x;
 			ray->wall_vert.y = next_on_wall.y;
+			if (data()->map.grid[(int)floor(ray->wall_vert.y / TILE)] \
+			[(int)floor(ray->wall_vert.x / TILE)] == 'D')
+				(1) && (ray->is_door = true);
 			return (1);
 		}
-		else
-			(1) && (next_on_wall.x += step.x, next_on_wall.y += step.y);
+		(1) && (next_on_wall.x += step.x, next_on_wall.y += step.y);
 	}
 	return (0);
 }

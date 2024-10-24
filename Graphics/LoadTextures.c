@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:11:55 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/10 09:59:27 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/16 10:27:07 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static mlx_texture_t	*init_texture(char *path)
 
 	texture = mlx_load_png(path);
 	if (!texture)
-		error_hanlder(YELLOW "<mlx>" RESET " Failed");
+		error_hanlder(mlx_strerror(MLX_INVPNG));
 	return (texture);
 }
 

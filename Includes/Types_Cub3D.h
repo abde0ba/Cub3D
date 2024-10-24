@@ -6,7 +6,7 @@
 /*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/15 21:53:37 by abbaraka         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:31:19 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define TYPES_CUB3D_H
 
 # include "MLX42.h"
-
 
 // Struct For x And y Coordinates
 typedef struct s_coordinates
@@ -24,11 +23,18 @@ typedef struct s_coordinates
 }					t_coordinates;
 
 // Struct For Doors
-typedef struct	s_door
+typedef struct s_door
 {
-	t_coordinates	coords;
+	// t_coordinates	coords;
+	int				y;
+	int				x;
 	int				state;
-	
+	bool			closed;
+	bool			opened;
+	bool			is_closing;
+	bool			is_opening;
+	int				progress;
+	// int				rays;
 }				t_door;
 
 // Struct for player direction and moves
@@ -41,6 +47,7 @@ typedef struct s_move
 // Struct for core game elements and rendering
 typedef struct s_game
 {
+	mlx_t			*mlx;			// Pointer to Main MLX
 	mlx_image_t		*screen;		// Main image to draw pixels
 	mlx_texture_t	*current;		// Texture (current direction)
 	double			proj_depth;		// Distance to the projection plane
@@ -54,6 +61,7 @@ typedef struct s_wall
 	double			end;			// Y-coordinate where the wall ends
 	double			start;			// Y-coordinate where the wall starts
 	double			height;			// Wall height in projection
+	bool			is_door;		// Check if it's a door
 }					t_wall;
 
 // Struct for map data
@@ -109,7 +117,8 @@ typedef struct s_ray
 	double			angle;			// Angle of the ray
 	double			distance;		// Distance to the closest wall
 	double			hit_point;		// Point of impact on the wall
-	double			is_vert;		// Point of impact on the wall
+	bool			is_vert;		// Point of impact on the wall
+	bool			is_door;		// Check if it's a door
 	t_coordinates	wall_horz;		// Intersection point (horizontal walls)
 	t_coordinates	wall_vert;		// Intersection point (vertical walls)
 }					t_ray;
@@ -117,7 +126,6 @@ typedef struct s_ray
 // Main Cub3D struct integrating all components
 typedef struct s_cub3d
 {
-	mlx_t			*mlx;			// Pointer to Main MLX
 	t_map			map;			// The map data and layout
 	t_textures		textures;		// Texture images (Path)
 	t_image			images;			// Laod images (Textures)
@@ -126,7 +134,7 @@ typedef struct s_cub3d
 	t_wall			wall;			// Wall rendering information
 	t_ray			*rays;			// Ray information
 	t_door			*doors;			// Door information
-	int				d_number;			// Door Numbers
+	int				d_number;		// Door Numbers
 }					t_cub3d;
 
 #endif

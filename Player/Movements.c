@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 21:57:45 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/14 16:24:53 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/24 16:27:16 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,15 @@ int	check_player_in_wall(double y, double x)
 	while (data()->map.grid[len_y])
 		len_y++;
 	len_x = data()->map.width;
-	if (len_y > index_y && index_y > -1 && len_x > index_x && index_x > -1
-		&& data()->map.grid[index_y][index_x] == '1')
-		return (1);
+	if ((len_y > index_y) && (index_y > -1)
+		&& (len_x > index_x) && (index_x > -1))
+	{
+		if (data()->map.grid[index_y][index_x] == '1')
+			return (1);
+		else if (data()->map.grid[index_y][index_x] == 'D'
+			&& check_if_door_open_close(y, x))
+			return (1);
+	}
 	return (0);
 }
 
