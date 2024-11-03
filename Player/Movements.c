@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 21:57:45 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/14 16:24:53 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/01 15:20:42 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	set_player_angle(char set)
 		data()->player.angle /= 2;
 	else if (set == 'N')
 		data()->player.angle = (M_PI / 2) * 3;
-	else if (set == 'E')
+	else if (set == 'W')
 		data()->player.angle *= 2;
 	return (true);
 }
@@ -35,10 +35,8 @@ int	check_player_in_wall(double y, double x)
 
 	index_y = floor(y / TILE);
 	index_x = floor(x / TILE);
-	len_y = 0;
-	while (data()->map.grid[len_y])
-		len_y++;
 	len_x = data()->map.width;
+	len_y = data()->map.height;
 	if (len_y > index_y && index_y > -1 && len_x > index_x && index_x > -1
 		&& data()->map.grid[index_y][index_x] == '1')
 		return (1);

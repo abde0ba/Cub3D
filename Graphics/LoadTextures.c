@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:11:55 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/22 17:28:37 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/02 11:41:38 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	get_textures(t_ray *ray)
 {
 	core()->current = data()->images.south;
-	if (ray->wall_horz.y > data()->player.pos.y)
+	if (ray->wall_horz.y <= data()->player.pos.y)
 		core()->current = data()->images.north;
 	if (ray->is_vert && ray->wall_vert.x > data()->player.pos.x)
 		core()->current = data()->images.east;
@@ -39,5 +39,6 @@ void	load_textures(void)
 	data()->images.west = init_texture(data()->textures.west);
 	data()->images.south = init_texture(data()->textures.south);
 	data()->images.north = init_texture(data()->textures.north);
-	data()->images.player = init_texture("Textures/player.png");
+	data()->images.player = init_texture("Textures/ship.png");
+	data()->images.frame = init_texture("Textures/frame.png");
 }

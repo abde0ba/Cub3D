@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:11:55 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/09 14:35:56 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/10/30 10:48:59 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	init_map_loader(void)
 	lenline = 0;
 	while (true)
 	{
+		data()->map.height++;
 		line = get_next_line(data()->map.file);
 		if (line == NULL)
 			break ;

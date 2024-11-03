@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/22 16:18:28 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/03 10:35:30 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_map
 {
 	int				file;			// File Descriptor Map
 	int				width;			// The Map width (line width)
+	int				height;			// The Map height (rows)
 	char			*load;			// loading map file data
 	char			**grid;			// 2D array for map grid
 }					t_map;
@@ -67,6 +68,7 @@ typedef struct s_image
 	mlx_texture_t	*east;			// Texture for east wall
 	mlx_texture_t	*west;			// Texture for west wall
 	mlx_texture_t	*player;		// Texture for player
+	mlx_texture_t	*frame;			// Texture for MiniMap
 }					t_image;
 
 // Struct for floor and ceiling colors
@@ -78,14 +80,30 @@ typedef struct s_colors
 	uint			ceiling;		// Ceiling color Value
 }					t_colors;
 
+// Struct for wall rendering information
+typedef struct s_mini
+{
+	int				mid_w;			// Map texture Medium Width
+	int				mid_h;			// Map texture Medium height
+	uint			mid_m;			// Map Radius(Circle)
+	uint			color;			// Color Of The Current Pixel
+	double			acos;			// Player Angle cos
+	double			asin;			// Player Angle sin
+	t_coordinates	axis;			// 
+	mlx_texture_t	*frame;			// Texture for MiniMap
+}					t_mini;
+
 // Struct for core game elements and rendering
 typedef struct s_game
 {
 	mlx_t			*mlx;			// Pointer to Main MLX
 	mlx_image_t		*screen;		// Main image to draw pixels
-	mlx_image_t		*s_mini;		// Minimap screen image
+	mlx_image_t		*mini_1;		// Minimap screen (first layer)
+	mlx_image_t		*mini_2;		// Minimap screen (second layer)
+	mlx_image_t		*mini_3;		// Minimap screen (third layer)
 	mlx_texture_t	*current;		// Texture (current direction)
 	double			proj_depth;		// Distance to the projection plane
+	bool			mouse;			// Set when the mouse position changes
 }					t_game;
 
 // Struct for ray information used in raycasting

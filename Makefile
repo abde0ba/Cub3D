@@ -6,7 +6,7 @@
 #    By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/16 12:39:22 by abadouab          #+#    #+#              #
-#    Updated: 2024/10/16 09:40:07 by abadouab         ###   ########.fr        #
+#    Updated: 2024/11/03 07:50:39 by abadouab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS		=	Core/Cub3D.c \
 				Player/Movements.c \
 				Core/Render.c \
 				Minimap/Minimap.c \
+				Minimap/mapFrame.c \
 				Graphics/LoadTextures.c \
 				Graphics/ApplyTextures.c \
 				Error/ErrorHandler.c
