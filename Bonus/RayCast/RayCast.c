@@ -6,21 +6,34 @@
 /*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:15:35 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/04 17:23:34 by abbaraka         ###   ########.fr       */
+/*   Updated: 2024/11/04 20:49:20 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3D.h"
+#include "Cub3D_bonus.h"
 
 static void remove_distortion(t_ray *ray, double horz_touch, double vert_touch)
 {
-	ray->distance = horz_touch;
-	ray->hit_point = ray->wall_horz.x;
+	int	x_to_set;
+	int	y_to_set;
+
+	(1) && (ray->distance = horz_touch, ray->hit_point = ray->wall_horz.x,
+	y_to_set = 0, x_to_set = 0);
 	if (horz_touch > vert_touch)
 	{
-		ray->is_vert = true;
-		ray->distance = vert_touch;
-		ray->hit_point = ray->wall_vert.y;
+		(data()->player.pos.x > ray->wall_vert.x) && (x_to_set = 1);
+		if (data()->map.grid[(int)ray->wall_vert.y / TILE] \
+		[(int)(ray->wall_vert.x / TILE) - x_to_set] == 'D')
+				(1) && (ray->is_door = true);
+		(1) && (ray->is_vert = true, ray->distance = vert_touch, 
+		ray->hit_point = ray->wall_vert.y);
+	}
+	else
+	{
+		(data()->player.pos.y > ray->wall_horz.y) && (y_to_set = 1);
+		if (data()->map.grid[(int)(ray->wall_horz.y / TILE) - y_to_set] \
+		[(int)ray->wall_horz.x / TILE] == 'D')
+			(1) && (ray->is_door = true);
 	}
 	ray->distance *= cos(ray->angle - data()->player.angle);
 	data()->wall.height = TILE / ray->distance * core()->proj_depth;
