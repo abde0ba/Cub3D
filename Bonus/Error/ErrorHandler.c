@@ -6,11 +6,11 @@
 /*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 19:21:42 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/03 18:04:39 by abbaraka         ###   ########.fr       */
+/*   Updated: 2024/11/03 18:25:50 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3D.h"
+#include "Cub3D_bonus.h"
 
 void	error_hanlder(const char *message)
 {

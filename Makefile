@@ -6,11 +6,13 @@
 #    By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/16 12:39:22 by abadouab          #+#    #+#              #
-#    Updated: 2024/11/05 15:27:18 by abadouab         ###   ########.fr        #
+#    Updated: 2024/11/07 20:59:50 by abadouab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	Cub3D
+NAME		=	cub3D
+
+NAME_B		=	cub3D_bonus
 
 SRCS		=	Core/Cub3D.c \
 				Core/Objects.c \
@@ -31,12 +33,35 @@ SRCS		=	Core/Cub3D.c \
 				Graphics/ApplyTextures.c \
 				Error/ErrorHandler.c
 
+SRCS_B		=	Bonus/Core/Cub3D.c \
+				Bonus/Core/Objects.c \
+				Bonus/Parser/Parser.c \
+				Bonus/Parser/ParseMap.c \
+				Bonus/Parser/ParseColor.c \
+				Bonus/Parser/ParseTexture.c \
+				Bonus/RayCast/RayCast.c \
+				Bonus/RayCast/RayCalc.c \
+				Bonus/RayCast/RayHit.c \
+				Bonus/Player/Movements.c \
+				Bonus/Core/Render.c \
+				Bonus/Doors/Doors.c \
+				Bonus/Doors/Door_functions.c \
+				Bonus/Minimap/Minimap.c \
+				Bonus/Minimap/mapFrame.c \
+				Bonus/Graphics/LoadTextures.c \
+				Bonus/Graphics/ApplyTextures.c \
+				Bonus/Error/ErrorHandler.c
+
 OBJS_DIR	=	.Objects/
 OBJS		=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 
+OBJS_B		=	$(addprefix $(OBJS_DIR), $(SRCS_B:.c=.o))
+
 MLX			=	MLX42/MLX
 MLX42		=	MLX42
-HEADER		=	Includes/Cub3D.h
+HEADER		=	Includes/Cub3D.h Includes/Types_Cub3D.h
+
+HEADER_B	=	Includes/Cub3D_bonus.h Includes/Types_bonus.h
 
 CLIB		=	CLib
 ARLIB		=	CLib/libar.a
@@ -54,6 +79,8 @@ REDCL		=	"\033[1;31m"
 RESET		=	"\033[0m"
 
 all: $(MLX42) start $(CLIB) $(NAME) finish
+
+bonus: $(MLX42) start $(CLIB) $(NAME_B) finish
 
 start:
 	@printf "\n"
@@ -85,13 +112,21 @@ $(OBJS): $(OBJS_DIR)%.o: %.c $(HEADER) $(ARLIB)
 	@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
 	@printf $(GREEN)"."$(RESET)
 
+$(NAME_B): $(OBJS_B)
+	@$(CC) $(FLAGS) $^ $(SHORT) -o $(NAME_B)
+
+$(OBJS_B): $(OBJS_DIR)%.o: %.c $(HEADER_B) $(ARLIB)
+	@mkdir -p $(dir $@)
+	@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
+	@printf $(GREEN)"."$(RESET)
+
 clean:
 	@$(RM) $(OBJS_DIR)
 	@make clean -C $(CLIB) --no-print-directory
 	@echo $(YELOW)Cleaning up 🧹💫$(RESET)
 
 fclean: removing clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(NAME_B)
 	@make fclean -C $(CLIB) --no-print-directory
 	@echo $(REDCL)Purging all files 🗑️$(RESET)
 
