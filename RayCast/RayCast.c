@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:15:35 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/03 11:04:02 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/06 15:31:03 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void remove_distortion(t_ray *ray, double horz_touch, double vert_touch)
 	data()->wall.start = (WIN_HEIGHT / 2) - (data()->wall.height / 2);
 	data()->wall.end = data()->wall.start + data()->wall.height;
 }
+
 
 static int	cast_the_ray_horz(t_ray *ray)
 {

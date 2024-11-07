@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/03 10:35:30 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/06 09:00:49 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "MLX42.h"
 
 typedef unsigned int uint;
+typedef mlx_texture_t mlx_tex;
+typedef mlx_image_t mlx_screen;
 
 // Struct For x And y Coordinates
 typedef struct s_coordinates
@@ -63,12 +65,16 @@ typedef struct s_textures
 // Struct for Images (Textures)
 typedef struct s_image
 {
-	mlx_texture_t	*north;			// Texture for north wall
-	mlx_texture_t	*south;			// Texture for south wall
-	mlx_texture_t	*east;			// Texture for east wall
-	mlx_texture_t	*west;			// Texture for west wall
-	mlx_texture_t	*player;		// Texture for player
-	mlx_texture_t	*frame;			// Texture for MiniMap
+	mlx_tex			*north;			// Texture for north wall
+	mlx_tex			*south;			// Texture for south wall
+	mlx_tex			*east;			// Texture for east wall
+	mlx_tex			*west;			// Texture for west wall
+	mlx_tex			*player;		// Texture for player
+	mlx_tex			*frame;			// Texture for MiniMap
+	mlx_tex			*gloss;			// Texture for MiniMap
+	mlx_tex			*view;			// Texture for MiniMap
+	mlx_tex			*back;			// Texture for background
+	// mlx_texture_t	*effects;		// Effects for MiniMap
 }					t_image;
 
 // Struct for floor and ceiling colors
@@ -97,10 +103,14 @@ typedef struct s_mini
 typedef struct s_game
 {
 	mlx_t			*mlx;			// Pointer to Main MLX
+	mlx_image_t		*back;		// Main image to draw pixels
 	mlx_image_t		*screen;		// Main image to draw pixels
+	mlx_image_t		*zoom;			// Main image to draw pixels
 	mlx_image_t		*mini_1;		// Minimap screen (first layer)
 	mlx_image_t		*mini_2;		// Minimap screen (second layer)
 	mlx_image_t		*mini_3;		// Minimap screen (third layer)
+	mlx_image_t		*mini_4;		// Minimap screen (third layer)
+	mlx_image_t		*mini_5;		// Minimap screen (third layer)
 	mlx_texture_t	*current;		// Texture (current direction)
 	double			proj_depth;		// Distance to the projection plane
 	bool			mouse;			// Set when the mouse position changes
@@ -109,6 +119,7 @@ typedef struct s_game
 // Struct for ray information used in raycasting
 typedef struct s_ray
 {
+	bool			reverse;		// X is reversed
 	int				index;			// Index number of this ray
 	double			angle;			// Angle of the ray
 	double			distance;		// Distance to the closest wall

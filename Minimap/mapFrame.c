@@ -1,16 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mapFrame.c                                         :+:      :+:    :+:   */
+/*   MapFrame.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 11:26:28 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/03 10:30:55 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/05 17:02:54 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
+
+void	refresh_minimap_display(void)
+{
+	t_coordinates	axis;
+	t_coordinates	start;
+	double			radius;
+
+	radius = MINIMAP / 2;
+	start = (t_coordinates){radius, radius};
+	axis.x = -radius;
+	while (axis.x < radius)
+	{
+		axis.y = -radius;
+		while (axis.y < radius)
+		{
+			if ((axis.x * axis.x) + (axis.y * axis.y) < (radius * radius))
+				mlx_put_pixel(core()->mini_1, start.x + axis.x,
+					start.y + axis.y, set_color(10, 10, 10, 80));
+			axis.y++;
+		}
+		axis.x++;
+	}
+	draw_texture(80, 80, data()->images.player, core()->mini_2);
+	draw_texture(0, 0, data()->images.view, core()->mini_4);
+	draw_texture(0, 0, data()->images.gloss, core()->mini_5);
+}
 
 static void	render_mapped_pixel(t_mini *mini, uint index, t_coordinates offset)
 {

@@ -1,13 +1,13 @@
-NO      Textures/bob.png
-WE      Textures/braz.png
-SO      Textures/lava.png
-EA      Textures/fire.png
+NO      Textures/prime.png
+WE      Textures/prime.png
+SO      Textures/prime.png
+EA      Textures/prime.png
 
 F 180,180,180
 C 080,080,080
 
 111111111111111
-1E0000100000001
+1S0000100000001
 10000111111111111111111111
 10000011000000000000010001
 10000010000000000000000001

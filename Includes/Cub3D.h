@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/03 10:35:45 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/05 16:13:51 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int			check_ray_dir_righ_left(double angle);
 
 ///////////////// CUB3D RANDER /////////////////
 
-void		load_textures(void);
+void		load_textures(t_game *game);
 void		minimap_rander(void);
 void		game_loop(void *param);
 void		move_player(void);
@@ -85,6 +85,9 @@ void		render(void);
 
 ///////////////// CUB3D MINIMAP /////////////////
 
+void		special_loop(mlx_key_data_t keydata, void* param);
+void		draw_texture(uint x, uint y, mlx_tex *texture, mlx_screen *screen);
 void		adjust_frame_angle(t_mini *mini);
+void		refresh_minimap_display(void);
 
 #endif

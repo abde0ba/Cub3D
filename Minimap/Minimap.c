@@ -6,53 +6,42 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 10:16:12 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/03 12:42:41 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/05 16:14:43 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
 
-void	draw_circle(double x, double y, double radius, int color)
+static void	render_mapped_pixel(t_mini *mini, t_coordinates axis)
 {
-	double		i;
-	double		j;
+	double			range;
+	uint			color;
 
-	i = -radius;
-	while (i < radius)
-	{
-		j = -radius;
-		while (j < radius)
-		{
-			// if ((i * i) + (j * j) < (radius * radius))
-				mlx_put_pixel(core()->mini_2, x + i, y + j, color);
-			j++;
-		}
-		i++;
-	}
+	color = set_color(200, 200, 200, 250);
+	range = (axis.x - mini->mid_m) * (axis.x - mini->mid_m);
+	range += (axis.y - mini->mid_m) * (axis.y - mini->mid_m);
+	if (range < mini->mid_m * mini->mid_m && axis.x >= 0 && axis.y >= 0
+		&& axis.x < MINIMAP  && axis.y < MINIMAP)
+		mlx_put_pixel(core()->mini_1, axis.x, axis.y, color);
 }
 
 void	square_draw(t_mini *mini, t_coordinates start)
 {
+	t_coordinates	d;
 	t_coordinates	axis;
 	t_coordinates	offset;
-	uint			color;
 
 	offset.y = 0.0;
-	color = set_color(255, 255, 255, 255);
-	while (offset.y < 2)
+	while (offset.y < 1.4)
 	{
 		offset.x = 0.0;
-		while (offset.x < 2)
+		while (offset.x < 1.4)
 		{
-			axis.x = (start.x + offset.x - mini->mid_m) * mini->acos;
-			axis.x -= (start.y + offset.y - mini->mid_m) * mini->asin;
-			axis.x += mini->mid_m;
-			axis.y = (start.x + offset.x - mini->mid_m) * mini->asin;
-			axis.y += (start.y + offset.y - mini->mid_m) * mini->acos;
-			axis.y += mini->mid_m;
-			if (axis.x >= 0 && axis.x < MINIMAP
-				&& axis.y >= 0 && axis.y < MINIMAP)
-				mlx_put_pixel(core()->mini_2, axis.x, axis.y, color);
+			d.x = start.x + offset.x - mini->mid_m;
+			d.y = start.y + offset.y - mini->mid_m;
+			axis.x = (d.x * mini->acos) - (d.y * mini->asin) + mini->mid_m;
+			axis.y = mini->mid_m - ((d.x * mini->asin) + (d.y * mini->acos));
+			render_mapped_pixel(mini, axis);
 			offset.x += 0.68;
 		}
 		offset.y += 0.68;
@@ -68,10 +57,10 @@ void	move_depending(t_mini *mini)
 	axis.y = 0;
 	start.x = data()->player.pos.x - 120;
 	start.y = data()->player.pos.y - 120;
-	while (axis.y < 8)
+	while (axis.y < 10)
 	{
 		axis.x = 0;
-		while (axis.x < 8)
+		while (axis.x < 10)
 		{
 			index.x = start.x / TILE + axis.x;
 			index.y = start.y / TILE + axis.y;
@@ -90,16 +79,15 @@ void	move_depending(t_mini *mini)
 
 void	minimap_rander(void)
 {
-	t_mini		mini;
+	t_mini			mini;
 
+	refresh_minimap_display();
 	mini.mid_m = MINIMAP / 2;
 	mini.frame = data()->images.frame;
 	mini.mid_w = mini.frame->width / 2;
 	mini.mid_h = mini.frame->height / 2;
 	mini.acos = cos(data()->player.angle);
 	mini.asin = sin(data()->player.angle);
-	draw_circle(100, 100, 100, 0XF4D03F);
-	draw_circle(100, 100, 5, set_color(0, 0, 0, 255));
 	move_depending(&mini);
 	adjust_frame_angle(&mini);
 }

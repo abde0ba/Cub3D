@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 12:16:39 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/02 13:13:38 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/06 15:35:49 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static void	color_floor_ceiling(int ray, int y)
 {
 	if (y < data()->wall.start)
-		mlx_put_pixel(core()->screen, ray, y, data()->colors.floor);
+		mlx_put_pixel(core()->screen, ray, y,set_color(0, 0, 0, 0));
 	else if (y > data()->wall.end)
-		mlx_put_pixel(core()->screen, ray, y, data()->colors.ceiling);
+		mlx_put_pixel(core()->screen, ray, y,set_color(0, 0, 0, 0));
 }
 
 static uint	apply_shade_effects(uint8_t *pixels, double distance)
@@ -60,6 +60,8 @@ void	render_walls(t_ray *ray, t_wall *wall)
 	get_textures(ray);
 	wall->offset_x = ray->hit_point * core()->current->width / TILE;
 	wall->offset_x %= core()->current->width;
+	if (ray->reverse)
+		wall->offset_x = core()->current->width - wall->offset_x;
 	while (y_axis < WIN_HEIGHT)
 	{
 		color_floor_ceiling(ray->index, y_axis);

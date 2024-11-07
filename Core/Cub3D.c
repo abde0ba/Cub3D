@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:45 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/03 07:59:32 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/05 17:14:45 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int ac, char **av)
 	core();
 	render();
 	mlx_loop_hook(core()->mlx, game_loop, NULL);
+	mlx_key_hook(core()->mlx, special_loop, NULL);
 	mlx_cursor_hook(core()->mlx, mouse_move, NULL);
 	mlx_loop(core()->mlx);
 	mlx_terminate(core()->mlx);

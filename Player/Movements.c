@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 21:57:45 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/01 15:20:42 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/04 18:09:06 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	set_player_angle(char set)
 	if (set == 'S')
 		data()->player.angle /= 2;
 	else if (set == 'N')
-		data()->player.angle = (M_PI / 2) * 3;
-	else if (set == 'W')
+		data()->player.angle = 3 * M_PI / 2;
+	else if (set == 'E')
 		data()->player.angle *= 2;
 	return (true);
 }
