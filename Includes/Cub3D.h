@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/14 17:58:04 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/14 22:31:02 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@
 # include "CLib.h"
 # include "Types_Cub3D.h"
 
-# define ERROR -1
-
-
 ///////////////// CUB3D WINDOW /////////////////
 
 # define WIN_WIDTH 1280
@@ -34,6 +31,7 @@
 
 ///////////////// CUB3D MACROS /////////////////
 
+# define ERROR -1
 # define TILE 30
 # define FOV 1.0471975511965976 // 60 degrees in radians
 
@@ -44,10 +42,13 @@
 # define YELLOW "\033[1;33m"
 # define RESET "\033[0m"
 
-///////////////// CUB3D PARSER /////////////////
+///////////////// CUB3D OBJECTS /////////////////
 
 t_cub3d		*data(void);
 t_game		*core(void);
+
+///////////////// CUB3D PARSER /////////////////
+
 void		error_hanlder(const char *message);
 void		parser(void);
 void		parse_map(void);
@@ -56,7 +57,6 @@ bool		valid_player_symbols(char symbol);
 bool		map_invalid_symbols(char *line);
 char		*parse_texture(char *object);
 bool		duplicated_elements(char set);
-int			set_player_angle(char set);
 
 ///////////////// CUB3D RAYCAST /////////////////
 
@@ -71,6 +71,11 @@ int			check_player_in_wall(double y, double x);
 int			check_ray_dir_down_up(double angle);
 int			check_ray_dir_righ_left(double angle);
 
+///////////////// CUB3D MOVEMENTS /////////////////
+
+void		move_player(void);
+int			set_player_angle(char set);
+
 ///////////////// CUB3D RANDER /////////////////
 
 void		init_screens(void);
@@ -79,7 +84,6 @@ void		minimap_rander(void);
 void		game_loop(void *param);
 void		move_player(void);
 void		render_walls(t_ray *ray, t_wall *wall);
-void		move_player(void);
 t_uint		set_color(t_uint red, t_uint green, t_uint blue, t_uint all);
 void		get_textures(t_ray *ray);
 bool		move_detected(void);
@@ -87,8 +91,12 @@ void		render(void);
 
 ///////////////// CUB3D MINIMAP /////////////////
 
-void		draw_texture(t_uint x, t_uint y, t_tex *texture, t_screen *screen);
+void		draw_texture(t_screen *screen, t_tex *texture, t_crd s);
 void		adjust_frame_angle(t_mini *mini);
 void		refresh_minimap_display(void);
+
+///////////////// CUB3D TOOLS /////////////////
+
+void		put_pixel(t_screen *screen, t_crd axis, t_uint color);
 
 #endif

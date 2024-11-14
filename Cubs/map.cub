@@ -1,7 +1,7 @@
-NO      Textures/prime.png
-WE      Textures/prime.png
-SO      Textures/prime.png
-EA      Textures/prime.png
+NO      Textures/Wall-001.png
+WE      Textures/Wall-003.png
+SO      Textures/Wall-002.png
+EA      Textures/Wall-004.png
 
 F 180,180,180
 C 080,080,080

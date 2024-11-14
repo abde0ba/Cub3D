@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 12:16:39 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/14 19:32:53 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/14 20:31:08 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static void	color_floor_ceiling(int ray, int y)
 {
 	if (y > data()->wall.end)
-		mlx_put_pixel(core()->screen, ray, y, data()->colors.floor);
+		put_pixel(core()->screen, (t_crd){ray, y}, data()->colors.floor);
 	else if (y < data()->wall.start)
-		mlx_put_pixel(core()->screen, ray, y, data()->colors.ceiling);
+		put_pixel(core()->screen, (t_crd){ray, y}, data()->colors.ceiling);
 }
 
 static t_uint	apply_shade_effects(uint8_t *pixels, double distance)
@@ -49,7 +49,7 @@ static void	apply_texture_to_ray(t_wall *wall, int x_axis, int y_axis)
 	index = core()->current->width * wall->offset_y + wall->offset_x;
 	index *= core()->current->bytes_per_pixel;
 	color = apply_shade_effects(pixels + index, wall->ray->distance);
-	mlx_put_pixel(core()->screen, x_axis, y_axis, color);
+	put_pixel(core()->screen, (t_crd){x_axis, y_axis}, color);
 }
 
 void	render_walls(t_ray *ray, t_wall *wall)
@@ -61,7 +61,7 @@ void	render_walls(t_ray *ray, t_wall *wall)
 	wall->offset_x = ray->hit_point * core()->current->width / TILE;
 	wall->offset_x %= core()->current->width;
 	if (ray->reverse)
-		wall->offset_x = core()->current->width - wall->offset_x;
+		wall->offset_x = core()->current->width - wall->offset_x - 1;
 	while (y_axis < WIN_HEIGHT)
 	{
 		color_floor_ceiling(ray->index, y_axis);

@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 10:16:12 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/13 15:31:55 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/14 19:47:57 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ static void	render_mapped_pixel(t_mini *mini, t_coordinates axis)
 	color = set_color(255, 255, 255, 255);
 	range = (axis.x - mini->mid_m) * (axis.x - mini->mid_m);
 	range += (axis.y - mini->mid_m) * (axis.y - mini->mid_m);
-	if (range < mini->mid_m * mini->mid_m && axis.x >= 0 && axis.y >= 0
-		&& axis.x < MINIMAP  && axis.y < MINIMAP)
-		mlx_put_pixel(core()->mini, axis.x, axis.y, color);
+	if (range < mini->mid_m * mini->mid_m)
+		put_pixel(core()->mini, (t_crd){axis.x, axis.y}, color);
 }
 
 void	rotate_pixel(t_mini *mini, t_coordinates start)

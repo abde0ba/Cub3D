@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 11:26:28 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/13 15:31:55 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/14 20:30:09 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ void	refresh_minimap_display(void)
 		while (axis.y < radius)
 		{
 			if ((axis.x * axis.x) + (axis.y * axis.y) < (radius * radius))
-				mlx_put_pixel(core()->mini, start.x + axis.x,
-					start.y + axis.y, set_color(10, 10, 10, 80));
+				put_pixel(core()->mini, (t_crd){start.x + axis.x,
+					start.y + axis.y}, set_color(10, 10, 10, 80));
 			axis.y++;
 		}
 		axis.x++;
 	}
-	draw_texture(80, 80, data()->images.player, core()->player);
-	draw_texture(0, 0, data()->images.view, core()->view);
-	draw_texture(0, 0, data()->images.gloss, core()->gloss);
+	draw_texture(core()->player, data()->images.player, (t_crd){80, 80});
+	draw_texture(core()->view, data()->images.view, (t_crd){0, 0});
+	draw_texture(core()->gloss, data()->images.gloss, (t_crd){0, 0});
 }
 
 static void	render_mapped_pixel(t_mini *mini, t_uint index, t_coordinates offset)
@@ -54,7 +54,7 @@ static void	render_mapped_pixel(t_mini *mini, t_uint index, t_coordinates offset
 	pixel_b = mini->frame->pixels[index + 2];
 	pixel_a = mini->frame->pixels[index + 3];
 	mini->color = set_color(pixel_r, pixel_g, pixel_b, pixel_a);
-	mlx_put_pixel(core()->frame, offset.x, offset.y, mini->color);
+	put_pixel(core()->frame, (t_crd){offset.x, offset.y}, mini->color);
 }
 
 void	adjust_frame_angle(t_mini *mini)

@@ -6,7 +6,7 @@
 #    By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/16 12:39:22 by abadouab          #+#    #+#              #
-#    Updated: 2024/11/14 17:50:22 by abadouab         ###   ########.fr        #
+#    Updated: 2024/11/14 20:41:11 by abadouab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS		=	Core/Cub3D.c \
 				RayCast/RayHit.c \
 				Player/Movements.c \
 				Core/Render.c \
+				Core/Tools.c \
 				Minimap/Minimap.c \
 				Minimap/MapFrame.c \
 				Graphics/LoadTextures.c \
@@ -64,7 +65,7 @@ CLIB		=	CLib
 ARLIB		=	CLib/libar.a
 
 CC			=	cc
-FLAGS		=	-Wall -Wextra -Werror #-g -fsanitize=address
+FLAGS		=	-Wall -Wextra -Werror # -g -fsanitize=address
 RM			=	rm -fr
 
 SHORT		=	-L$(CLIB) -lar -L $(MLX) -l mlx42 -lglfw
@@ -129,4 +130,4 @@ fclean: removing clean
 
 re: fclean all
 
-.PHONY: $(CLIB) $(MLX42)
+.PHONY: $(CLIB) $(MLX42) clean

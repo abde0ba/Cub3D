@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/14 17:58:53 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/14 22:29:48 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 
 # include "MLX42.h"
 
-typedef unsigned int	t_uint;
 typedef mlx_texture_t	t_tex;
+typedef unsigned int	t_uint;
 typedef mlx_image_t		t_screen;
 
-// Struct For x And y Coordinates
+// Struct For x And y Coordinates (uint)
 typedef struct s_coordinate
 {
 	t_uint			x;				// X coordinate
 	t_uint			y;				// Y coordinate
-}					t_coordinate;
+}					t_crd;
 
-// Struct For x And y Coordinates
+// Struct For x And y Coordinates (double)
 typedef struct s_coordinates
 {
 	double			x;				// X coordinate
@@ -81,7 +81,6 @@ typedef struct s_image
 	t_tex			*frame;			// Texture for MiniMap
 	t_tex			*gloss;			// Texture for MiniMap
 	t_tex			*view;			// Texture for MiniMap
-	t_tex			*aim;			// Texture for MiniMap
 	t_tex			*frames[27];	// Texture for Player
 }					t_image;
 
@@ -115,12 +114,12 @@ typedef struct s_game
 	double			proj_depth;		// Distance to the projection plane
 	mlx_t			*mlx;			// Pointer to Main MLX
 	t_screen		*screen;		// Main image to draw pixels
+	t_screen		*front;			// Screen to draw player
 	t_screen		*mini;			// Minimap screen (first layer)
 	t_screen		*player;		// Minimap screen (second layer)
 	t_screen		*view;			// Minimap screen (third layer)
-	t_screen		*frame;			// Minimap screen (third layer)
-	t_screen		*gloss;			// Minimap screen (third layer)
-	t_screen		*front;			// Minimap screen (third layer)
+	t_screen		*frame;			// Minimap screen (fourth layer)
+	t_screen		*gloss;			// Minimap screen (fifth layer)
 	t_tex			*current;		// Texture (current direction)
 }					t_game;
 

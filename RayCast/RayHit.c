@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:06:24 by abbaraka          #+#    #+#             */
-/*   Updated: 2024/10/30 10:52:44 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/14 20:51:46 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	check_hit_ray_horz(t_ray *ray, t_coordinates next_on_wall,
 			ray->wall_horz.x = next_on_wall.x;
 			return (ray->wall_horz.y = next_on_wall.y, 1);
 		}
-		(1) && (next_on_wall.x += step.x, next_on_wall.y += step.y);
+		next_on_wall.x += step.x;
+		next_on_wall.y += step.y;
 	}
 	return (0);
 }
@@ -49,7 +50,8 @@ int	check_hit_ray_vert(t_ray *ray, t_coordinates next_on_wall,
 			ray->wall_vert.x = next_on_wall.x;
 			return (ray->wall_vert.y = next_on_wall.y, 1);
 		}
-		(1) && (next_on_wall.x += step.x, next_on_wall.y += step.y);
+		next_on_wall.x += step.x;
+		next_on_wall.y += step.y;
 	}
 	return (0);
 }

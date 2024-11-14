@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 12:57:00 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/14 17:03:19 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/14 20:33:55 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ void	get_textures(t_ray *ray)
 		core()->current = data()->images.east;
 }
 
-void	draw_texture(t_uint x, t_uint y, t_tex *texture, t_screen *screen)
+void	draw_texture(t_screen *screen, t_tex *texture, t_crd s)
 {
+	t_crd			axis;
 	t_uint			color;
 	t_uint			index;
 	uint8_t			*pixels;
-	t_coordinates	axis;
 
 	axis.x = 0;
 	pixels = texture->pixels;
@@ -47,7 +47,7 @@ void	draw_texture(t_uint x, t_uint y, t_tex *texture, t_screen *screen)
 			index *= texture->bytes_per_pixel;
 			color = set_color(pixels[index], pixels[index + 1],
 				pixels[index + 2], pixels[index + 3]);
-			mlx_put_pixel(screen, axis.x + x, axis.y + y, color);
+			put_pixel(screen, (t_crd){s.x + axis.x, s.x + axis.y}, color);
 			axis.y++;
 		}
 		axis.x++;
