@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:11:55 by abadouab          #+#    #+#             */
-/*   Updated: 2024/10/30 10:48:59 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:42:24 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,5 @@ void	parse_map(void)
 	normalize_map_shape(data()->map.grid, data()->map.width);
 	while (data()->map.grid[height])
 		is_map_surrounded(&data()->map, height++);
+	data()->map.valid = true;
 }

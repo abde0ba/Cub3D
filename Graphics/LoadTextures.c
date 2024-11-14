@@ -6,76 +6,53 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:11:55 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/06 15:52:31 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/14 16:38:30 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
 
-static mlx_texture_t	*init_texture(char *path)
+static void	init_texture(t_tex **screen, char *path)
 {
-	mlx_texture_t	*texture;
-
-	texture = mlx_load_png(path);
-	if (!texture)
+	*screen = mlx_load_png(path);
+	if (*screen == NULL)
 		error_hanlder(mlx_strerror(MLX_INVPNG));
-	return (texture);
 }
 
-void	get_textures(t_ray *ray)
+static void	push_screen(t_screen **screen, t_coordinate pos, t_coordinate size)
 {
-	core()->current = data()->images.north;
-	if (!ray->is_vert && ray->wall_horz.y > data()->player.pos.y)
-	{
-		ray->reverse = true;
-		core()->current = data()->images.south;
-	}
-	else if (ray->is_vert && ray->wall_vert.x <= data()->player.pos.x)
-	{
-		ray->reverse = true;
-		core()->current = data()->images.west;
-	}
-	else if (ray->is_vert && ray->wall_vert.x > data()->player.pos.x)
-		core()->current = data()->images.east;
-}
-
-static void	init_screens(t_game *game)
-{
-	game->back = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
-	game->screen = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
-	game->zoom = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
-	game->mini_1 = mlx_new_image(game->mlx, MINIMAP, MINIMAP);
-	game->mini_2 = mlx_new_image(game->mlx, MINIMAP, MINIMAP);
-	game->mini_3 = mlx_new_image(game->mlx, MINIMAP + 10, MINIMAP + 10);
-	game->mini_4 = mlx_new_image(game->mlx, MINIMAP, MINIMAP);
-	game->mini_5 = mlx_new_image(game->mlx, MINIMAP, MINIMAP);
-	if (game->screen == NULL || game->zoom == NULL || game->mini_1 == NULL
-		|| game->mini_2 == NULL || game->mini_3 == NULL || game->mini_4 == NULL
-		|| game->mini_5 == NULL || game->back == NULL)
+	*screen = mlx_new_image(core()->mlx, size.x, size.y);
+	if (*screen == NULL)
 		error_hanlder(mlx_strerror(MLX_INVIMG));
-	mlx_image_to_window(game->mlx, game->back, 0, 0);
-	mlx_image_to_window(game->mlx, game->screen, 0, 0);
-	mlx_image_to_window(game->mlx, game->zoom, 0, 0);
-	mlx_image_to_window(game->mlx, game->mini_1, 15, 14);
-	mlx_image_to_window(game->mlx, game->mini_4, 20, 19);
-	mlx_image_to_window(game->mlx, game->mini_2, 15, 14);
-	mlx_image_to_window(game->mlx, game->mini_3, 10, 9);
-	mlx_image_to_window(game->mlx, game->mini_5, 20, 19);
+	if (mlx_image_to_window(core()->mlx, *screen, pos.x, pos.y) == ERROR)
+		error_hanlder(mlx_strerror(MLX_INVIMG));
 }
 
-void	load_textures(t_game *game)
+void	init_screens(void)
 {
-	game->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cub3D", false);
-	if (game->mlx == NULL)
-		error_hanlder(mlx_strerror(MLX_WINFAIL));
-	init_screens(game);
-	data()->images.east = init_texture(data()->textures.east);
-	data()->images.west = init_texture(data()->textures.west);
-	data()->images.south = init_texture(data()->textures.south);
-	data()->images.north = init_texture(data()->textures.north);
-	data()->images.player = init_texture("Textures/ship.png");
-	data()->images.frame = init_texture("Textures/frame.png");
-	data()->images.gloss = init_texture("Textures/gloss.png");
-	data()->images.view = init_texture("Textures/view.png");
-	data()->images.back = init_texture("Textures/hole.png");
+	t_coordinate	size;
+
+	size = (t_coordinate){WIN_WIDTH, WIN_HEIGHT};
+	push_screen(&core()->screen, (t_coordinate){0, 0}, size);
+	push_screen(&core()->front, (t_coordinate){0, 0}, size);
+	size = (t_coordinate){MINIMAP, MINIMAP};
+	push_screen(&core()->mini, (t_coordinate){15, 14}, size);
+	push_screen(&core()->view, (t_coordinate){20, 19}, size);
+	push_screen(&core()->player, (t_coordinate){15, 14}, size);
+	size = (t_coordinate){size.x + 10, size.y + 10};
+	push_screen(&core()->frame, (t_coordinate){10, 9}, size);
+	size = (t_coordinate){size.x - 10, size.y - 10};
+	push_screen(&core()->gloss, (t_coordinate){20, 19}, size);
+}
+
+void	load_textures(void)
+{
+	init_texture(&data()->images.east, data()->textures.east);
+	init_texture(&data()->images.west, data()->textures.west);
+	init_texture(&data()->images.south, data()->textures.south);
+	init_texture(&data()->images.north, data()->textures.north);
+	init_texture(&data()->images.player, "Textures/Minimap/ship.png");
+	init_texture(&data()->images.frame, "Textures/Minimap/frame.png");
+	init_texture(&data()->images.gloss, "Textures/Minimap/gloss.png");
+	init_texture(&data()->images.view, "Textures/Minimap/view.png");
 }

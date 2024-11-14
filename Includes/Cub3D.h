@@ -6,25 +6,25 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/05 16:13:51 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/14 17:58:04 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <stdio.h>
-# include <stdbool.h>
-# include <stdlib.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <sys/stat.h>
 # include <math.h>
+# include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <stdbool.h>
+# include <sys/stat.h>
 
 # include "CLib.h"
 # include "Types_Cub3D.h"
 
 # define ERROR -1
+
 
 ///////////////// CUB3D WINDOW /////////////////
 
@@ -73,20 +73,21 @@ int			check_ray_dir_righ_left(double angle);
 
 ///////////////// CUB3D RANDER /////////////////
 
-void		load_textures(t_game *game);
+void		init_screens(void);
+void		load_textures(void);
 void		minimap_rander(void);
 void		game_loop(void *param);
 void		move_player(void);
 void		render_walls(t_ray *ray, t_wall *wall);
 void		move_player(void);
-uint		set_color(uint red, uint green, uint blue, uint all);
+t_uint		set_color(t_uint red, t_uint green, t_uint blue, t_uint all);
 void		get_textures(t_ray *ray);
+bool		move_detected(void);
 void		render(void);
 
 ///////////////// CUB3D MINIMAP /////////////////
 
-void		special_loop(mlx_key_data_t keydata, void* param);
-void		draw_texture(uint x, uint y, mlx_tex *texture, mlx_screen *screen);
+void		draw_texture(t_uint x, t_uint y, t_tex *texture, t_screen *screen);
 void		adjust_frame_angle(t_mini *mini);
 void		refresh_minimap_display(void);
 

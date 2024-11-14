@@ -6,12 +6,11 @@
 #    By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/16 12:39:22 by abadouab          #+#    #+#              #
-#    Updated: 2024/11/07 20:59:50 by abadouab         ###   ########.fr        #
+#    Updated: 2024/11/14 17:50:22 by abadouab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3D
-
 NAME_B		=	cub3D_bonus
 
 SRCS		=	Core/Cub3D.c \
@@ -27,7 +26,6 @@ SRCS		=	Core/Cub3D.c \
 				Core/Render.c \
 				Minimap/Minimap.c \
 				Minimap/MapFrame.c \
-				Minimap/MapZoom.c \
 				Graphics/LoadTextures.c \
 				Graphics/DrawTextures.c \
 				Graphics/ApplyTextures.c \
@@ -54,7 +52,6 @@ SRCS_B		=	Bonus/Core/Cub3D.c \
 
 OBJS_DIR	=	.Objects/
 OBJS		=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
-
 OBJS_B		=	$(addprefix $(OBJS_DIR), $(SRCS_B:.c=.o))
 
 MLX			=	MLX42/MLX
@@ -67,7 +64,7 @@ CLIB		=	CLib
 ARLIB		=	CLib/libar.a
 
 CC			=	cc
-FLAGS		=	-Wall -Wextra -Werror # -g -fsanitize=address
+FLAGS		=	-Wall -Wextra -Werror #-g -fsanitize=address
 RM			=	rm -fr
 
 SHORT		=	-L$(CLIB) -lar -L $(MLX) -l mlx42 -lglfw

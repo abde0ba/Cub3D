@@ -6,22 +6,27 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 22:02:18 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/07 19:51:06 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/14 16:57:39 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
 
-bool	move_detected(void)
-{
-	return (core()->mouse == true
-		|| mlx_is_key_down(core()->mlx, MLX_KEY_RIGHT) == true
-		|| mlx_is_key_down(core()->mlx, MLX_KEY_LEFT) == true
-		|| mlx_is_key_down(core()->mlx, MLX_KEY_W) == true
-		|| mlx_is_key_down(core()->mlx, MLX_KEY_S) == true
-		|| mlx_is_key_down(core()->mlx, MLX_KEY_A) == true
-		|| mlx_is_key_down(core()->mlx, MLX_KEY_D) == true);
-}
+// static void	game_effects(void)
+// {
+// 	static	t_uint	frame;
+// 	static	t_uint	reverse;
+
+// 	if (frame == 26)
+// 		reverse = 1;
+// 	else if (frame == 0)
+// 		reverse = 0;
+// 	if (reverse == 0)
+// 		frame++;
+// 	else if (reverse && frame > 0)
+// 		frame--;
+// 	draw_texture(0, 0, data()->images.frames[frame], core()->front);
+// }
 
 void	render(void)
 {
@@ -37,6 +42,7 @@ void	render(void)
 void	game_loop(void *param)
 {
 	(void) param;
+	// game_effects();
 	if (mlx_is_key_down(core()->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(core()->mlx);
 	if (mlx_is_key_down(core()->mlx, MLX_KEY_W))

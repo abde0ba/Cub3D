@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 12:16:39 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/06 15:35:49 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/14 19:32:53 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,32 @@
 
 static void	color_floor_ceiling(int ray, int y)
 {
-	if (y < data()->wall.start)
-		mlx_put_pixel(core()->screen, ray, y,set_color(0, 0, 0, 0));
-	else if (y > data()->wall.end)
-		mlx_put_pixel(core()->screen, ray, y,set_color(0, 0, 0, 0));
+	if (y > data()->wall.end)
+		mlx_put_pixel(core()->screen, ray, y, data()->colors.floor);
+	else if (y < data()->wall.start)
+		mlx_put_pixel(core()->screen, ray, y, data()->colors.ceiling);
 }
 
-static uint	apply_shade_effects(uint8_t *pixels, double distance)
+static t_uint	apply_shade_effects(uint8_t *pixels, double distance)
 {
-	uint		shade_r;
-	uint		shade_g;
-	uint		shade_b;
+	t_uint		shade_r;
+	t_uint		shade_g;
+	t_uint		shade_b;
 	double		intensity;
 
 	intensity = 1.0 - (distance / 750.0);
 	if (intensity < 0.4)
 		intensity = 0.4;
-	shade_r = (uint)(*pixels * intensity);
-	shade_g = (uint)(*(pixels + 1) * intensity);
-	shade_b = (uint)(*(pixels + 2) * intensity);
+	shade_r = (t_uint)(*pixels * intensity);
+	shade_g = (t_uint)(*(pixels + 1) * intensity);
+	shade_b = (t_uint)(*(pixels + 2) * intensity);
 	return(set_color(shade_r, shade_g, shade_b, *(pixels + 3)));
 }
 
 static void	apply_texture_to_ray(t_wall *wall, int x_axis, int y_axis)
 {
-	uint		index;
-	uint		color;
+	t_uint		index;
+	t_uint		color;
 	uint8_t		*pixels;
 
 	pixels = core()->current->pixels;

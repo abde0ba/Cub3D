@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 09:29:27 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/06 11:35:53 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/13 17:02:29 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ t_game	*core(void)
 	{
 		ft_bzero(&game, sizeof(t_game));
 		game.proj_depth = (WIN_WIDTH / 2) / tan(FOV / 2);
-		load_textures(&game);
+		game.mid_h = WIN_HEIGHT / 2;
+		game.mid_w = WIN_WIDTH / 2;
 		set = 1;
 	}
 	return (&game);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ErrorHandler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 19:21:42 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/03 18:04:39 by abbaraka         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:48:39 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	error_hanlder(const char *message)
 	cleanup();
 	if (data()->map.file != ERROR)
 		close(data()->map.file);
-	if (core()->screen)
-		mlx_delete_image(core()->mlx, core()->screen);
-	if (core()->mlx)
-		mlx_terminate(core()->mlx);
 	exit(EXIT_FAILURE);
+	if (data()->map.valid && core()->screen)
+		mlx_delete_image(core()->mlx, core()->screen);
+	if (data()->map.valid && core()->mlx)
+		mlx_terminate(core()->mlx);
 }

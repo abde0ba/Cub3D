@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/06 09:00:49 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/14 17:58:53 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,16 @@
 
 # include "MLX42.h"
 
-typedef unsigned int uint;
-typedef mlx_texture_t mlx_tex;
-typedef mlx_image_t mlx_screen;
+typedef unsigned int	t_uint;
+typedef mlx_texture_t	t_tex;
+typedef mlx_image_t		t_screen;
+
+// Struct For x And y Coordinates
+typedef struct s_coordinate
+{
+	t_uint			x;				// X coordinate
+	t_uint			y;				// Y coordinate
+}					t_coordinate;
 
 // Struct For x And y Coordinates
 typedef struct s_coordinates
@@ -36,6 +43,7 @@ typedef struct s_move
 // Struct for map data
 typedef struct s_map
 {
+	bool			valid;			//	Check map is valid
 	int				file;			// File Descriptor Map
 	int				width;			// The Map width (line width)
 	int				height;			// The Map height (rows)
@@ -65,16 +73,16 @@ typedef struct s_textures
 // Struct for Images (Textures)
 typedef struct s_image
 {
-	mlx_tex			*north;			// Texture for north wall
-	mlx_tex			*south;			// Texture for south wall
-	mlx_tex			*east;			// Texture for east wall
-	mlx_tex			*west;			// Texture for west wall
-	mlx_tex			*player;		// Texture for player
-	mlx_tex			*frame;			// Texture for MiniMap
-	mlx_tex			*gloss;			// Texture for MiniMap
-	mlx_tex			*view;			// Texture for MiniMap
-	mlx_tex			*back;			// Texture for background
-	// mlx_texture_t	*effects;		// Effects for MiniMap
+	t_tex			*north;			// Texture for north wall
+	t_tex			*south;			// Texture for south wall
+	t_tex			*east;			// Texture for east wall
+	t_tex			*west;			// Texture for west wall
+	t_tex			*player;		// Texture for player
+	t_tex			*frame;			// Texture for MiniMap
+	t_tex			*gloss;			// Texture for MiniMap
+	t_tex			*view;			// Texture for MiniMap
+	t_tex			*aim;			// Texture for MiniMap
+	t_tex			*frames[27];	// Texture for Player
 }					t_image;
 
 // Struct for floor and ceiling colors
@@ -82,8 +90,8 @@ typedef struct s_colors
 {
 	bool			setfloor;		// Floor color set
 	bool			setceiling;		// Ceiling color set
-	uint			floor;			// Floor color Value
-	uint			ceiling;		// Ceiling color Value
+	t_uint			floor;			// Floor color Value
+	t_uint			ceiling;		// Ceiling color Value
 }					t_colors;
 
 // Struct for wall rendering information
@@ -91,29 +99,29 @@ typedef struct s_mini
 {
 	int				mid_w;			// Map texture Medium Width
 	int				mid_h;			// Map texture Medium height
-	uint			mid_m;			// Map Radius(Circle)
-	uint			color;			// Color Of The Current Pixel
 	double			acos;			// Player Angle cos
 	double			asin;			// Player Angle sin
-	t_coordinates	axis;			// 
-	mlx_texture_t	*frame;			// Texture for MiniMap
+	t_uint			mid_m;			// Map Medium (height & Width)
+	t_uint			color;			// Color Of The Current Pixel
+	t_tex			*frame;			// Texture for MiniMap
 }					t_mini;
 
 // Struct for core game elements and rendering
 typedef struct s_game
 {
-	mlx_t			*mlx;			// Pointer to Main MLX
-	mlx_image_t		*back;		// Main image to draw pixels
-	mlx_image_t		*screen;		// Main image to draw pixels
-	mlx_image_t		*zoom;			// Main image to draw pixels
-	mlx_image_t		*mini_1;		// Minimap screen (first layer)
-	mlx_image_t		*mini_2;		// Minimap screen (second layer)
-	mlx_image_t		*mini_3;		// Minimap screen (third layer)
-	mlx_image_t		*mini_4;		// Minimap screen (third layer)
-	mlx_image_t		*mini_5;		// Minimap screen (third layer)
-	mlx_texture_t	*current;		// Texture (current direction)
-	double			proj_depth;		// Distance to the projection plane
 	bool			mouse;			// Set when the mouse position changes
+	t_uint			mid_h;			// Screen medium height
+	t_uint			mid_w;			// Screen medium with
+	double			proj_depth;		// Distance to the projection plane
+	mlx_t			*mlx;			// Pointer to Main MLX
+	t_screen		*screen;		// Main image to draw pixels
+	t_screen		*mini;			// Minimap screen (first layer)
+	t_screen		*player;		// Minimap screen (second layer)
+	t_screen		*view;			// Minimap screen (third layer)
+	t_screen		*frame;			// Minimap screen (third layer)
+	t_screen		*gloss;			// Minimap screen (third layer)
+	t_screen		*front;			// Minimap screen (third layer)
+	t_tex			*current;		// Texture (current direction)
 }					t_game;
 
 // Struct for ray information used in raycasting
@@ -132,8 +140,8 @@ typedef struct s_ray
 // Struct for wall rendering information
 typedef struct s_wall
 {
-	uint			offset_x;		// X texture offset
-	uint			offset_y;		// Y texture offset
+	t_uint			offset_x;		// X texture offset
+	t_uint			offset_y;		// Y texture offset
 	double			end;			// Y-coordinate where the wall ends
 	double			start;			// Y-coordinate where the wall starts
 	double			height;			// Wall height in projection

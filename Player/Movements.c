@@ -6,11 +6,22 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 21:57:45 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/04 18:09:06 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/13 17:57:22 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
+
+bool	move_detected(void)
+{
+	return (core()->mouse == true
+		|| mlx_is_key_down(core()->mlx, MLX_KEY_RIGHT) == true
+		|| mlx_is_key_down(core()->mlx, MLX_KEY_LEFT) == true
+		|| mlx_is_key_down(core()->mlx, MLX_KEY_W) == true
+		|| mlx_is_key_down(core()->mlx, MLX_KEY_S) == true
+		|| mlx_is_key_down(core()->mlx, MLX_KEY_A) == true
+		|| mlx_is_key_down(core()->mlx, MLX_KEY_D) == true);
+}
 
 int	set_player_angle(char set)
 {

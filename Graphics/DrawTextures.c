@@ -6,16 +6,33 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 12:57:00 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/05 10:34:14 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/14 17:03:19 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cub3D.h"
 
-void	draw_texture(uint x, uint y, mlx_tex *texture, mlx_screen *screen)
+void	get_textures(t_ray *ray)
 {
-	uint			color;
-	uint			index;
+	core()->current = data()->images.north;
+	if (!ray->is_vert && ray->wall_horz.y > data()->player.pos.y)
+	{
+		ray->reverse = true;
+		core()->current = data()->images.south;
+	}
+	else if (ray->is_vert && ray->wall_vert.x <= data()->player.pos.x)
+	{
+		ray->reverse = true;
+		core()->current = data()->images.west;
+	}
+	else if (ray->is_vert && ray->wall_vert.x > data()->player.pos.x)
+		core()->current = data()->images.east;
+}
+
+void	draw_texture(t_uint x, t_uint y, t_tex *texture, t_screen *screen)
+{
+	t_uint			color;
+	t_uint			index;
 	uint8_t			*pixels;
 	t_coordinates	axis;
 

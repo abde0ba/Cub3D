@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 11:26:28 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/05 17:02:54 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/13 15:31:55 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,23 @@ void	refresh_minimap_display(void)
 		while (axis.y < radius)
 		{
 			if ((axis.x * axis.x) + (axis.y * axis.y) < (radius * radius))
-				mlx_put_pixel(core()->mini_1, start.x + axis.x,
+				mlx_put_pixel(core()->mini, start.x + axis.x,
 					start.y + axis.y, set_color(10, 10, 10, 80));
 			axis.y++;
 		}
 		axis.x++;
 	}
-	draw_texture(80, 80, data()->images.player, core()->mini_2);
-	draw_texture(0, 0, data()->images.view, core()->mini_4);
-	draw_texture(0, 0, data()->images.gloss, core()->mini_5);
+	draw_texture(80, 80, data()->images.player, core()->player);
+	draw_texture(0, 0, data()->images.view, core()->view);
+	draw_texture(0, 0, data()->images.gloss, core()->gloss);
 }
 
-static void	render_mapped_pixel(t_mini *mini, uint index, t_coordinates offset)
+static void	render_mapped_pixel(t_mini *mini, t_uint index, t_coordinates offset)
 {
-	uint			pixel_r;
-	uint			pixel_g;
-	uint			pixel_b;
-	uint			pixel_a;
+	t_uint			pixel_r;
+	t_uint			pixel_g;
+	t_uint			pixel_b;
+	t_uint			pixel_a;
 
 	if (offset.x < 0 || offset.x >= mini->frame->width
 		|| offset.y < 0 || offset.y >= mini->frame->height)
@@ -54,12 +54,12 @@ static void	render_mapped_pixel(t_mini *mini, uint index, t_coordinates offset)
 	pixel_b = mini->frame->pixels[index + 2];
 	pixel_a = mini->frame->pixels[index + 3];
 	mini->color = set_color(pixel_r, pixel_g, pixel_b, pixel_a);
-	mlx_put_pixel(core()->mini_3, offset.x, offset.y, mini->color);
+	mlx_put_pixel(core()->frame, offset.x, offset.y, mini->color);
 }
 
 void	adjust_frame_angle(t_mini *mini)
 {
-	uint			index;
+	t_uint			index;
 	t_coordinates	d;
 	t_coordinates	axis;
 	t_coordinates	offset;

@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 19:22:38 by abadouab          #+#    #+#             */
-/*   Updated: 2023/12/28 09:43:52 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/11 18:24:32 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_atoi(const char *str)
 	while (str[i] && (str[i] >= '0' && str[i] <= '9'))
 	{
 		if (num > 922337203685477580
-			|| (num > 922337203685477580 && str[i] > '7'))
+			|| (num == 922337203685477580 && str[i] > '7'))
 			return (over_fix(sign));
 		num = num * 10 + str[i] - 48;
 		i++;

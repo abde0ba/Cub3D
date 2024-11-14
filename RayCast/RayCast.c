@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:15:35 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/07 21:00:17 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/10 21:31:40 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,9 @@ static void remove_distortion(t_ray *ray, double horz_touch, double vert_touch)
 	}
 	ray->distance *= cos(ray->angle - data()->player.angle);
 	data()->wall.height = TILE / ray->distance * core()->proj_depth;
-	data()->wall.start = (WIN_HEIGHT / 2) - (data()->wall.height / 2);
+	data()->wall.start = core()->mid_h - (data()->wall.height / 2);
 	data()->wall.end = data()->wall.start + data()->wall.height;
 }
-
 
 static int	cast_the_ray_horz(t_ray *ray)
 {
