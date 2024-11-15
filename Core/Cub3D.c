@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:45 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/15 15:15:52 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:55:49 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,8 @@ void	mouse_move(double x, double y, void *param)
 	data()->player.angle += offset_x * (data()->player.rot.speed / 5.2);
 }
 
-void f()
-{
-	system("leaks cub3D");
-}
 int	main(int ac, char **av)
 {
-	atexit(f);
 	data()->map.file = ac;
 	data()->map.load = av[1];
 	parser();
@@ -51,6 +46,5 @@ int	main(int ac, char **av)
 	mlx_loop_hook(core()->mlx, game_loop, NULL);
 	mlx_cursor_hook(core()->mlx, mouse_move, NULL);
 	mlx_loop(core()->mlx);
-	mlx_terminate(core()->mlx);
-	return (cleanup(), EXIT_SUCCESS);
+	error_hanlder(NULL);
 }

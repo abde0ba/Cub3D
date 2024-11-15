@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ErrorHandler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abbaraka <abbaraka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 19:21:42 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/15 14:56:18 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:54:53 by abbaraka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,7 @@ void	error_hanlder(const char *message)
 	delete_textures();
 	if (data()->map.valid && core()->mlx)
 		mlx_terminate(core()->mlx);
+	if (message == NULL)
+		exit(EXIT_SUCCESS);
 	exit(EXIT_FAILURE);
 }
