@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Effects.c                                          :+:      :+:    :+:   */
+/*   Effects_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 19:39:35 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/15 14:56:30 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:05:44 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3D.h"
+#include "Cub3D_bonus.h"
 
 void	put_pixel(t_screen *screen, t_crd axis, t_uint color)
 {

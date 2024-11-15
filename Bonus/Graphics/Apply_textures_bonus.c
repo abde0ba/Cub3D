@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ApplyTextures.c                                    :+:      :+:    :+:   */
+/*   Apply_textures_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 12:16:39 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/15 14:56:03 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:00:51 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3D.h"
+#include "Cub3D_bonus.h"
 
 static void	color_floor_ceiling(int ray, int y)
 {
@@ -62,6 +62,14 @@ void	render_walls(t_ray *ray, t_wall *wall)
 	wall->offset_x %= core()->current->width;
 	if (ray->reverse)
 		wall->offset_x = core()->current->width - wall->offset_x - 1;
+	if (ray->is_vert == false && ray->is_door)
+		ray->progress = data()->doors[check_the_specific_door(ray->wall_horz.y, \
+			ray->wall_horz.x, 'h')].progress;
+	if (ray->is_vert == true && ray->is_door)
+		ray->progress = data()->doors[check_the_specific_door(ray->wall_vert.y, \
+			ray->wall_vert.x, 'v')].progress;
+	wall->offset_x -= ray->progress * 15;
+	wall->offset_x %= core()->current->width;
 	while (y_axis < WIN_HEIGHT)
 	{
 		color_floor_ceiling(ray->index, y_axis);

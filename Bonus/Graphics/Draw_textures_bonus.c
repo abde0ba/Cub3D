@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   DrawTextures.c                                     :+:      :+:    :+:   */
+/*   Draw_textures_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 12:57:00 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/15 14:55:40 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:00:28 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3D.h"
+#include "Cub3D_bonus.h"
 
 void	get_textures(t_ray *ray)
 {
+	check_is_door(ray);
 	core()->current = data()->images.north;
-	if (!ray->is_vert && ray->wall_horz.y > data()->player.pos.y)
+	if (ray->is_door == true)
+		core()->current = data()->images.door;
+	else if (!ray->is_vert && ray->wall_horz.y > data()->player.pos.y)
 	{
 		ray->reverse = true;
 		core()->current = data()->images.south;

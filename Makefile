@@ -6,7 +6,7 @@
 #    By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/16 12:39:22 by abadouab          #+#    #+#              #
-#    Updated: 2024/11/15 06:57:40 by abadouab         ###   ########.fr        #
+#    Updated: 2024/11/15 11:27:33 by abadouab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,24 +32,27 @@ SRCS		=	Core/Cub3D.c \
 				Graphics/ApplyTextures.c \
 				Error/ErrorHandler.c
 
-SRCS_B		=	Bonus/Core/Cub3D.c \
-				Bonus/Core/Objects.c \
-				Bonus/Parser/Parser.c \
-				Bonus/Parser/ParseMap.c \
-				Bonus/Parser/ParseColor.c \
-				Bonus/Parser/ParseTexture.c \
-				Bonus/RayCast/RayCast.c \
-				Bonus/RayCast/RayCalc.c \
-				Bonus/RayCast/RayHit.c \
-				Bonus/Player/Movements.c \
-				Bonus/Core/Render.c \
+SRCS_B		=	Bonus/Core/Cub3D_bonus.c \
+				Bonus/Core/Objects_bonus.c \
+				Bonus/Parser/Parser_bonus.c \
+				Bonus/Parser/Parse_map_bonus.c \
+				Bonus/Parser/Parse_color_bonus.c \
+				Bonus/Parser/Parse_texture_bonus.c \
+				Bonus/RayCast/Ray_cast_bonus.c \
+				Bonus/RayCast/Ray_calc_bonus.c \
+				Bonus/RayCast/Ray_hit_bonus.c \
+				Bonus/Player/Movements_bonus.c \
+				Bonus/Core/Render_bonus.c \
+				Bonus/Core/Effects_bonus.c \
+				Bonus/Minimap/Minimap_bonus.c \
+				Bonus/Minimap/Map_frame_bonus.c \
+				Bonus/Graphics/Load_textures_bonus.c \
+				Bonus/Graphics/Draw_textures_bonus.c \
+				Bonus/Graphics/Apply_textures_bonus.c \
 				Bonus/Doors/Doors.c \
+				Bonus/Doors/Door_tools.c \
 				Bonus/Doors/Door_functions.c \
-				Bonus/Minimap/Minimap.c \
-				Bonus/Minimap/mapFrame.c \
-				Bonus/Graphics/LoadTextures.c \
-				Bonus/Graphics/ApplyTextures.c \
-				Bonus/Error/ErrorHandler.c
+				Bonus/Error/Error_handler_bonus.c
 
 OBJS_DIR	=	.Objects/
 OBJS		=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))

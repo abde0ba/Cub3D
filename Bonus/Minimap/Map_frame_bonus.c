@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   MapFrame.c                                         :+:      :+:    :+:   */
+/*   Map_frame_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 11:26:28 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/15 14:51:52 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:00:08 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3D.h"
+#include "Cub3D_bonus.h"
 
 void	refresh_minimap_display(void)
 {
@@ -38,7 +38,8 @@ void	refresh_minimap_display(void)
 	draw_texture(core()->gloss, data()->images.gloss, (t_crd){0, 0});
 }
 
-static void	render_mapped_pix(t_mini *mini, t_uint index, t_coordinates offset)
+static void	render_mapped_pixel(t_mini *mini, t_uint index,
+					t_coordinates offset)
 {
 	t_uint			pixel_r;
 	t_uint			pixel_g;
@@ -75,7 +76,7 @@ void	adjust_frame_angle(t_mini *mini)
 			offset.x = (d.x * mini->acos) - (d.y * mini->asin) + mini->mid_w;
 			offset.y = (d.x * mini->asin) + (d.y * mini->acos) + mini->mid_h;
 			index = axis.y * mini->frame->width + axis.x;
-			render_mapped_pix(mini, index, offset);
+			render_mapped_pixel(mini, index, offset);
 			axis.y++;
 		}
 		axis.x++;

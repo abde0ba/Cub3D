@@ -1,16 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ParseMap.c                                         :+:      :+:    :+:   */
+/*   Parse_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 08:11:55 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/15 14:42:10 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/15 14:49:03 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3D.h"
+#include "Cub3D_bonus.h"
+
+static bool	check_door_is_valid(t_map *map, int ay, int ax)
+{
+	if (map->grid[ay][ax] == 'D')
+	{
+		if (ay - 1 >= 0 && ay + 1 < map->height && map->grid[ay - 1][ax] == '1'
+			&& map->grid[ay + 1][ax] == '1')
+			return (true);
+		if (ax - 1 >= 0 && ax + 1 < map->height && map->grid[ay][ax - 1] == '1'
+			&& map->grid[ay][ax + 1] == '1')
+			return (true);
+		return (false);
+	}
+	return (true);
+}
 
 static void	init_map_loader(void)
 {
@@ -64,8 +79,10 @@ static void	is_map_surrounded(t_map *map, int height)
 	grid = map->grid;
 	while (grid[height][++width])
 	{
+		if (check_door_is_valid(map, height, width) == false)
+			error_hanlder("Invalid " YELLOW "<Map>" RESET);
 		if (valid_player_symbols(grid[height][width]) == false
-			&& grid[height][width] != '0')
+			&& grid[height][width] != '0' && grid[height][width] != 'D')
 			continue ;
 		if (set_player_angle(grid[height][width]) == true)
 		{

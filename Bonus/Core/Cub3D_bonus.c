@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cub3D.c                                            :+:      :+:    :+:   */
+/*   Cub3D_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:45 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/15 15:15:52 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/15 09:43:56 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cub3D.h"
+#include "Cub3D_bonus.h"
 
 void	mlx_start(void)
 {
 	core();
+	get_doors();
 	core()->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cub3D", false);
 	if (core()->mlx == NULL)
 		error_hanlder(mlx_strerror(MLX_WINFAIL));
@@ -37,13 +38,8 @@ void	mouse_move(double x, double y, void *param)
 	data()->player.angle += offset_x * (data()->player.rot.speed / 5.2);
 }
 
-void f()
-{
-	system("leaks cub3D");
-}
 int	main(int ac, char **av)
 {
-	atexit(f);
 	data()->map.file = ac;
 	data()->map.load = av[1];
 	parser();
