@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 10:16:12 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/15 14:54:12 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:33:44 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	move_depending(t_mini *mini)
 	t_coordinates	axis;
 
 	axis.y = 0;
-	start.x = data()->player.pos.x - 146;
-	start.y = data()->player.pos.y - 146;
+	start.x = data()->player.pos.x - 140;
+	start.y = data()->player.pos.y - 140;
 	while (axis.y < 10)
 	{
 		axis.x = 0;

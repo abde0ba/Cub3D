@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 10:16:12 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/15 14:59:49 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:36:32 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ void	minimap_rander(void)
 	mini.mid_h = mini.frame->height / 2;
 	mini.acos = cos(data()->player.angle);
 	mini.asin = sin(data()->player.angle);
-	mini.start.x = data()->player.pos.x - 146;
-	mini.start.y = data()->player.pos.y - 146;
+	mini.start.x = data()->player.pos.x - 148;
+	mini.start.y = data()->player.pos.y - 148;
 	move_depending(&mini);
 	adjust_frame_angle(&mini);
 }
