@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 21:57:45 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/13 17:57:22 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/15 08:39:50 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,29 @@ int	check_player_in_wall(double y, double x)
 	return (0);
 }
 
-void	check_player_moving_l_and_r(double *x, double *y)
+void    check_player_moving_l_and_r(double *x, double *y)
 {
-	if (data()->player.l_r.direction == 1)
-	{
-		*x = data()->player.pos.x - cos(data()->player.angle + \
-		(90 * M_PI / 180));
-		*y = data()->player.pos.y - sin(data()->player.angle + \
-		(90 * M_PI / 180));
-	}
-	else if (data()->player.l_r.direction == -1)
-	{
-		*x = data()->player.pos.x + cos(data()->player.angle + \
-		(90 * M_PI / 180));
-		*y = data()->player.pos.y + sin(data()->player.angle + \
-		(90 * M_PI / 180));
-	}
+    double    check_y;
+    double    check_x;
+    if (data()->player.l_r.direction == 1)
+    {
+        check_y = data()->player.pos.y - sin(data()->player.angle + \
+                    (90 * M_PI / 180)) * 3.2;
+        check_x = data()->player.pos.x - cos(data()->player.angle + \
+                    (90 * M_PI / 180)) * 3.2;
+        if (!check_player_in_wall(check_y, check_x))
+            (1) && (*x = check_x, *y = check_y);
+    }
+    else if (data()->player.l_r.direction == -1)
+    {
+        check_y = data()->player.pos.y + sin(data()->player.angle + \
+                    (90 * M_PI / 180)) * 3.2;
+        check_x = data()->player.pos.x + cos(data()->player.angle + \
+                    (90 * M_PI / 180)) * 3.2;
+        if (!check_player_in_wall(check_y, check_x))
+            (1) && (*x = check_x, *y = check_y);
+    }
 }
-
 void	move_player(void)
 {
 	double	x;

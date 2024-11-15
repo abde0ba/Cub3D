@@ -6,7 +6,7 @@
 #    By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/16 12:39:22 by abadouab          #+#    #+#              #
-#    Updated: 2024/11/14 20:41:11 by abadouab         ###   ########.fr        #
+#    Updated: 2024/11/15 06:57:40 by abadouab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS		=	Core/Cub3D.c \
 				RayCast/RayHit.c \
 				Player/Movements.c \
 				Core/Render.c \
-				Core/Tools.c \
+				Core/Effects.c \
 				Minimap/Minimap.c \
 				Minimap/MapFrame.c \
 				Graphics/LoadTextures.c \
@@ -57,8 +57,8 @@ OBJS_B		=	$(addprefix $(OBJS_DIR), $(SRCS_B:.c=.o))
 
 MLX			=	MLX42/MLX
 MLX42		=	MLX42
-HEADER		=	Includes/Cub3D.h Includes/Types_Cub3D.h
 
+HEADER		=	Includes/Cub3D.h Includes/Types_Cub3D.h
 HEADER_B	=	Includes/Cub3D_bonus.h Includes/Types_bonus.h
 
 CLIB		=	CLib
@@ -91,9 +91,6 @@ finish:
 	@echo $(GREEN)Project built.$(RESET)
 	@printf "\n"
 
-removing:
-	@if [ -d $(MLX) ]; then rm -rf $(MLX); fi
-
 $(CLIB):
 	@make -sC $(CLIB) --no-print-directory
 
@@ -123,8 +120,8 @@ clean:
 	@make clean -C $(CLIB) --no-print-directory
 	@echo $(YELOW)Cleaning up 🧹💫$(RESET)
 
-fclean: removing clean
-	@$(RM) $(NAME) $(NAME_B)
+fclean: clean
+	@$(RM) $(NAME) $(NAME_B) $(MLX)
 	@make fclean -C $(CLIB) --no-print-directory
 	@echo $(REDCL)Purging all files 🗑️$(RESET)
 

@@ -3,8 +3,8 @@ WE      Textures/Wall-003.png
 SO      Textures/Wall-002.png
 EA      Textures/Wall-004.png
 
-F 180,180,180
-C 080,080,080
+F 040,010,010
+C 000,000,000
 
 111111111111111
 1S0000100000001

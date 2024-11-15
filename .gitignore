@@ -1,3 +1,4 @@
 *.o
 .Objects
 .vscode
+.DS_Store

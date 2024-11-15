@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:41 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/14 22:31:02 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/15 05:12:32 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ t_game		*core(void);
 
 ///////////////// CUB3D PARSER /////////////////
 
-void		error_hanlder(const char *message);
 void		parser(void);
 void		parse_map(void);
 int			parse_color(char *object);
@@ -74,6 +73,7 @@ int			check_ray_dir_righ_left(double angle);
 ///////////////// CUB3D MOVEMENTS /////////////////
 
 void		move_player(void);
+bool		move_detected(void);
 int			set_player_angle(char set);
 
 ///////////////// CUB3D RANDER /////////////////
@@ -82,11 +82,9 @@ void		init_screens(void);
 void		load_textures(void);
 void		minimap_rander(void);
 void		game_loop(void *param);
-void		move_player(void);
 void		render_walls(t_ray *ray, t_wall *wall);
-t_uint		set_color(t_uint red, t_uint green, t_uint blue, t_uint all);
 void		get_textures(t_ray *ray);
-bool		move_detected(void);
+void		game_effects(void);
 void		render(void);
 
 ///////////////// CUB3D MINIMAP /////////////////
@@ -98,5 +96,7 @@ void		refresh_minimap_display(void);
 ///////////////// CUB3D TOOLS /////////////////
 
 void		put_pixel(t_screen *screen, t_crd axis, t_uint color);
+t_uint		set_color(t_uint red, t_uint green, t_uint blue, t_uint all);
+void		error_hanlder(const char *message);
 
 #endif

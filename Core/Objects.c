@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 09:29:27 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/14 20:53:38 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/15 08:20:26 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ t_cub3d	*data(void)
 	if (set == 0)
 	{
 		ft_bzero(&data, sizeof(t_cub3d));
-		data.player.rot.speed = (double)M_PI / 80;
-		data.player.walk.speed = (double)TILE / 8;
+		data.player.rot.speed = (double)M_PI / 60;
+		data.player.walk.speed = (double)TILE / 6;
 		set = 1;
 	}
 	return (&data);

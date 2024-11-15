@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 10:33:45 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/14 20:46:48 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/15 08:22:30 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	mouse_move(double x, double y, void *param)
 	mlx_set_cursor_mode(core()->mlx, MLX_MOUSE_HIDDEN);
 	mlx_set_mouse_pos(core()->mlx, core()->mid_w, core()->mid_h);
 	offset_x = x - core()->mid_w;
-	data()->player.angle += offset_x * (data()->player.rot.speed / 4);
+	data()->player.angle += offset_x * (data()->player.rot.speed / 5.2);
 }
 
 int	main(int ac, char **av)

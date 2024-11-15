@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:15:35 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/10 21:31:40 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/15 08:59:35 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	cast_the_ray_horz(t_ray *ray)
 	step.y = TILE;
 	if (!check_ray_dir_down_up(ray->angle))
 		step.y *= -1;
-	step.x = TILE / tan(ray->angle);
+	step.x = step.y / tan(ray->angle);
 	if (check_ray_dir_righ_left(ray->angle) && step.x < 0)
 		step.x *= -1;
 	if (!check_ray_dir_righ_left(ray->angle) && step.x > 0)
@@ -68,7 +68,7 @@ static int	cast_the_ray_vert(t_ray *ray)
 	step.x = TILE;
 	if (!check_ray_dir_righ_left(ray->angle))
 		step.x *= -1;
-	step.y = TILE * tan(ray->angle);
+	step.y = step.x * tan(ray->angle);
 	if (!check_ray_dir_down_up(ray->angle) && step.y > 0)
 		step.y *= -1;
 	if (check_ray_dir_down_up(ray->angle) && step.y < 0)
@@ -111,6 +111,8 @@ void	raycasting(void)
 	index = 0;
 	angle = ranging_angle(data()->player.angle - (FOV / 2));
 	data()->rays = ft_calloc(WIN_WIDTH, sizeof(t_ray));
+	if (data()->rays == NULL)
+		error_hanlder(mlx_strerror(MLX_MEMFAIL));
 	while (index < WIN_WIDTH)
 	{
 		data()->rays[index].angle = ranging_angle(angle);

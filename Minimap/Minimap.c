@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 10:16:12 by abadouab          #+#    #+#             */
-/*   Updated: 2024/11/14 19:47:57 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/11/15 08:54:51 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	render_mapped_pixel(t_mini *mini, t_coordinates axis)
 	double			range;
 	t_uint			color;
 
-	color = set_color(255, 255, 255, 255);
+	color = set_color(200, 200, 200, 200);
 	range = (axis.x - mini->mid_m) * (axis.x - mini->mid_m);
 	range += (axis.y - mini->mid_m) * (axis.y - mini->mid_m);
 	if (range < mini->mid_m * mini->mid_m)
@@ -30,7 +30,7 @@ void	rotate_pixel(t_mini *mini, t_coordinates start)
 	t_coordinates	axis;
 	double			offset;
 
-	offset = 25.0;
+	offset = 20.0;
 	d.x = start.x * offset - mini->mid_m;
 	d.y = start.y * offset - mini->mid_m;
 	axis.x = (d.x * mini->acos) - (d.y * mini->asin) + mini->mid_m;
@@ -45,8 +45,8 @@ void	move_depending(t_mini *mini)
 	t_coordinates	axis;
 
 	axis.y = 0;
-	start.x = data()->player.pos.x - 120;
-	start.y = data()->player.pos.y - 120;
+	start.x = data()->player.pos.x - 146;
+	start.y = data()->player.pos.y - 146;
 	while (axis.y < 10)
 	{
 		axis.x = 0;
@@ -60,9 +60,9 @@ void	move_depending(t_mini *mini)
 					if (data()->map.grid[(int)index.y][(int)index.x] == '1')
 						rotate_pixel(mini, (t_coordinates){axis.y, axis.x});
 				}
-			axis.x += 0.028;
+			axis.x += 0.034;
 		}
-		axis.y += 0.028;
+		axis.y += 0.034;
 	}
 }
 
